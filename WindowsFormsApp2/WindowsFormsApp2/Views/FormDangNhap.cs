@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using WindowsFormsApp2.models;
+using WindowsFormsApp2.Models;
 
 namespace WindowsFormsApp2.Views
 {
