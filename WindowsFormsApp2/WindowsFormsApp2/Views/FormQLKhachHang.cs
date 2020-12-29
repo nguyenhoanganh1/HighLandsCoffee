@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using WindowsFormsApp2.models;
+using WindowsFormsApp2.Models;
 
 namespace WindowsFormsApp2
 {
@@ -35,6 +35,7 @@ namespace WindowsFormsApp2
                     Id = x.Id,
                     Name = x.Name,
                     Address = x.Address,
+
                     PhoneNumber = (int) x.Phone
                     
                 }).ToList();
@@ -54,7 +55,8 @@ namespace WindowsFormsApp2
                     cus.Phone = Convert.ToInt32(txtPhoneNumber.Text);               
                     SaveStudentDetails(cus);                     
                     Display();
-                    Clear();                     MessageBox.Show("Thêm Thành Công");    
+                    Clear();                     
+                    MessageBox.Show("Thêm Thành Công");    
                 }   
                 else
                     {

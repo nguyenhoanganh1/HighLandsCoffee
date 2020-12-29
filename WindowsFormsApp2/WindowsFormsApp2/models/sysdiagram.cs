@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WindowsFormsApp2.models
+namespace WindowsFormsApp2.Models
 {
     using System;
     using System.Collections.Generic;

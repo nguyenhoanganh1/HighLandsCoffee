@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WindowsFormsApp2.models
+namespace WindowsFormsApp2.Models
 {
     using System;
     using System.Collections.Generic;
@@ -23,9 +23,9 @@ namespace WindowsFormsApp2.models
         public int Id { get; set; }
         public string Address { get; set; }
         public Nullable<System.DateTime> OrderDate { get; set; }
-        public Nullable<int> CustomerId { get; set; }
+        public string EmployeeId { get; set; }
     
-        public virtual Customer Customer { get; set; }
+        public virtual Employee Employee { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductDetail> ProductDetails { get; set; }
     }
