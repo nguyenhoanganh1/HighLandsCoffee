@@ -27,7 +27,7 @@ namespace WindowsFormsApp2.Views
                 employee.Password = txtPassword.Text;
                 var id = context.Employees.Where(x => x.UserName == employee.UserName && x.Password == employee.Password && x.Role == true );
                 foreach(var item in id)
-                {
+                {                   
                     this.Hide();
                     FormQLKhachHang form = new FormQLKhachHang();
                     form.ShowDialog();

@@ -7,26 +7,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WindowsFormsApp2.Models
+namespace WindowsFormsApp2.Views
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Employee
+    public partial class Bill
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Employee()
+        public Bill()
         {
-            this.Orders = new HashSet<Order>();
+            this.ProductDetails = new HashSet<ProductDetail>();
         }
     
-        public string UserName { get; set; }
-        public string Password { get; set; }
+        public int id { get; set; }
         public string Name { get; set; }
-        public Nullable<bool> Role { get; set; }
-        public Nullable<decimal> Salary { get; set; }
+        public Nullable<int> Quantity { get; set; }
+        public Nullable<double> Price { get; set; }
+        public Nullable<System.DateTime> Date { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<ProductDetail> ProductDetails { get; set; }
     }
 }

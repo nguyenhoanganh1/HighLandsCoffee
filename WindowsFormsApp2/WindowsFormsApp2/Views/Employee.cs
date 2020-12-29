@@ -7,13 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WindowsFormsApp2.models
+namespace WindowsFormsApp2.Views
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class sp_helpdiagramdefinition_Result
+    public partial class Employee
     {
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        public string Name { get; set; }
+        public Nullable<bool> Role { get; set; }
+        public Nullable<decimal> Salary { get; set; }
     }
 }

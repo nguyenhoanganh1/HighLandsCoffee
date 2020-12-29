@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WindowsFormsApp2.models
+namespace WindowsFormsApp2.Models
 {
     using System;
     using System.Collections.Generic;
@@ -20,14 +20,14 @@ namespace WindowsFormsApp2.models
             this.ProductDetails = new HashSet<ProductDetail>();
         }
     
-        public int Id { get; set; }
+        public int id { get; set; }
         public string Name { get; set; }
         public Nullable<int> Quantity { get; set; }
         public Nullable<System.DateTime> ProductDate { get; set; }
-        public Nullable<double> UnitPrice { get; set; }
-        public Nullable<int> CategoryId { get; set; }
-        public Nullable<int> PromotionId { get; set; }
+        public Nullable<decimal> UnitPrice { get; set; }
+        public byte[] Images { get; set; }
         public Nullable<int> SupplierId { get; set; }
+        public Nullable<int> CategoryId { get; set; }
     
         public virtual CategoryProduct CategoryProduct { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
