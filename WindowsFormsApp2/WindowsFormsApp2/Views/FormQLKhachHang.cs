@@ -35,9 +35,7 @@ namespace WindowsFormsApp2
                     Id = x.Id,
                     Name = x.Name,
                     Address = x.Address,
-
-                    PhoneNumber = (int) x.Phone
-                    
+                    PhoneNumber = (int) x.Phone                   
                 }).ToList();
                 dataGridView1.DataSource = _customerList;
             }

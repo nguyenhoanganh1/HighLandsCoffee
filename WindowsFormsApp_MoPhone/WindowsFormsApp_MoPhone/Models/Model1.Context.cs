@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WindowsFormsApp2.Models
+namespace WindowsFormsApp_MoPhone.Models
 {
     using System;
     using System.Data.Entity;

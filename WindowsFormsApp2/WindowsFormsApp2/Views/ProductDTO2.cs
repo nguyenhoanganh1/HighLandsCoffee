@@ -8,7 +8,7 @@ namespace WindowsFormsApp2.Views
         public string name { get; set; }
         public int quantity { get; set; }
         public DateTime productDate { get; set; }
-        public decimal unitPrice { get; set; }
+        public decimal UnitPrice { get; set; }
         public byte[] images { get; set; } 
         public string supplierId { get; set; }
         public string categoryId { get; set; }

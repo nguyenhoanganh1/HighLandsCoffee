@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WindowsFormsApp2.Models
+namespace WindowsFormsApp_MoPhone.Models
 {
     using System;
     using System.Collections.Generic;
@@ -23,8 +23,12 @@ namespace WindowsFormsApp2.Models
         public int id { get; set; }
         public string Name { get; set; }
         public Nullable<int> Quantity { get; set; }
+        public Nullable<double> Discount { get; set; }
         public Nullable<System.DateTime> ProductDate { get; set; }
         public Nullable<decimal> UnitPrice { get; set; }
+        public Nullable<System.DateTime> DateDiscountEnd { get; set; }
+        public Nullable<System.DateTime> DateDiscountStart { get; set; }
+        public string TimeGuarantee { get; set; }
         public string Description { get; set; }
         public byte[] Images { get; set; }
         public Nullable<int> SupplierId { get; set; }
@@ -32,7 +36,7 @@ namespace WindowsFormsApp2.Models
         public Nullable<int> DiscountId { get; set; }
     
         public virtual CategoryProduct CategoryProduct { get; set; }
-        public virtual Discount Discount { get; set; }
+        public virtual Discount Discount1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductDetail> ProductDetails { get; set; }
         public virtual Supplier Supplier { get; set; }

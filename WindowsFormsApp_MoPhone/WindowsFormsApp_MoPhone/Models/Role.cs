@@ -7,26 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WindowsFormsApp2.Models
+namespace WindowsFormsApp_MoPhone.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Bill
+    public partial class Role
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Bill()
+        public Role()
         {
-            this.ProductDetails = new HashSet<ProductDetail>();
+            this.RoleDetails = new HashSet<RoleDetail>();
         }
     
         public int id { get; set; }
-        public string Name { get; set; }
-        public Nullable<int> Quantity { get; set; }
-        public Nullable<double> Price { get; set; }
-        public Nullable<System.DateTime> Date { get; set; }
+        public string NameRole { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProductDetail> ProductDetails { get; set; }
+        public virtual ICollection<RoleDetail> RoleDetails { get; set; }
     }
 }

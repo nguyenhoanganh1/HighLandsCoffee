@@ -7,20 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WindowsFormsApp2.Models
+namespace WindowsFormsApp_MoPhone.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class ProductDetail
+    public partial class Employee
     {
         public int Id { get; set; }
-        public Nullable<int> Quantity { get; set; }
-        public Nullable<decimal> UnitPrice { get; set; }
-        public Nullable<int> OrderId { get; set; }
-        public Nullable<int> ProductId { get; set; }
-    
-        public virtual Order Order { get; set; }
-        public virtual Product Product { get; set; }
+        public string Address { get; set; }
+        public string Name { get; set; }
+        public string PhoneNumber { get; set; }
+        public Nullable<decimal> Salary { get; set; }
     }
 }

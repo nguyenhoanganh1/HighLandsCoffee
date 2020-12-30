@@ -12,6 +12,7 @@ namespace WindowsFormsApp2.Views
 {
     public partial class FormQL_SanPham : Form
     {
+        
         private Image image;
 
         public FormQL_SanPham()
@@ -22,14 +23,16 @@ namespace WindowsFormsApp2.Views
         {
            try
             {
-                    SettingForm();
-                    var context = new QL_BanHangEntities();
-                    List<Product> products = context.Products.ToList(); 
+                SettingForm();
+                using(var context = new QL_BanHangEntities())
+                {                   
                     List<CategoryProduct> categoryProducts = context.CategoryProducts.ToList();
-                    List<Supplier> suppliers = context.Suppliers.ToList();        
+                    List<Supplier> suppliers = context.Suppliers.ToList();
                     FillCategory(categoryProducts);
-                    FillSupplier(suppliers);     
-                    Display();           
+                    FillSupplier(suppliers);
+                }
+                    
+                Display();
             }
             catch (Exception ex)
             {
@@ -42,16 +45,16 @@ namespace WindowsFormsApp2.Views
 
         public void Display()   
         {
-            using (QL_BanHangEntities _entity = new QL_BanHangEntities())
+            using (var _entity = new QL_BanHangEntities())
             {
                 List<ProductDTO2> _studentList = new List<ProductDTO2>();
-                _studentList = _entity.Products.Select(x => new ProductDTO2
+                _studentList = model.Products.Select(x => new ProductDTO2
                 {
                     id = x.id,
                     name = x.Name,
                     quantity = x.Quantity.Value,
                     productDate = x.ProductDate.Value,
-                    unitPrice = x.UnitPrice.Value,
+                    //UnitPrice = (decimal) x.UnitPrice.Value,
                     images = x.Images,
                     categoryId = x.CategoryProduct.Name,
                     supplierId = x.Supplier.Name
@@ -126,11 +129,11 @@ namespace WindowsFormsApp2.Views
         {
             try
             {
-                using (var context = new QL_BanHangEntities())
+                using (QL_BanHangEntities context = new QL_BanHangEntities())
                 {
                     MemoryStream stream = new MemoryStream();
                     pbPhoto.Image.Save(stream, ImageFormat.Jpeg);
-                    Product productId = context.Products.FirstOrDefault(p => p.id.ToString() == txtId.Text);
+                    Product productId = model.Products.FirstOrDefault(p => p.id.ToString() == txtId.Text);
                 
                 if (productId != null)
                     {
@@ -141,7 +144,7 @@ namespace WindowsFormsApp2.Views
                         productId.Images = stream.ToArray();
                         productId.SupplierId = Convert.ToInt32(cbNhaCungCap.SelectedValue.ToString());
                         productId.CategoryId = Convert.ToInt32(cbLoai.SelectedValue.ToString());
-                        context.SaveChanges();
+                        //context.SaveChanges();
                         MessageBox.Show("Sửa thành công");
                     }
                     else
@@ -154,8 +157,8 @@ namespace WindowsFormsApp2.Views
                         product.Images = stream.ToArray();
                         product.SupplierId = Convert.ToInt32(cbNhaCungCap.SelectedValue.ToString());
                         product.CategoryId = Convert.ToInt32(cbLoai.SelectedValue.ToString());
-                        context.Products.Add(product);
-                        context.SaveChanges();
+                        // context.Products.Add(product);
+                        model.SaveChanges();
                         MessageBox.Show("Thếm thành công");
                     }      
                 }
@@ -174,13 +177,12 @@ namespace WindowsFormsApp2.Views
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            using (var context = new QL_BanHangEntities())
-            {
-                Product productId = context.Products.FirstOrDefault(p => p.id.ToString() == txtId.Text);
+           
+                Product productId = model.Products.FirstOrDefault(p => p.id.ToString() == txtId.Text);
                 if (productId != null)
                 {
-                    context.Products.Remove(productId);
-                    context.SaveChanges();
+                    model.Products.Remove(productId);
+                    model.SaveChanges();
                     MessageBox.Show("Xóa thành công");
                 }
                 else
@@ -189,7 +191,7 @@ namespace WindowsFormsApp2.Views
                 }
               Display();      
                 
-            }
+            
         }
 
         private void dgvListSanPham_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -204,7 +206,7 @@ namespace WindowsFormsApp2.Views
                 txtGia.Text = dgvListSanPham.SelectedRows[0].Cells[4].Value.ToString();
                 // hinh anh
                 var context = new QL_BanHangEntities();
-                Product product = context.Products.FirstOrDefault(p => p.id.ToString() == txtId.Text);
+                Product product = model.Products.FirstOrDefault(p => p.id.ToString() == txtId.Text);
                 MemoryStream stream = new MemoryStream(product.Images.ToArray());
                 Image img = Image.FromStream(stream);
                 pbPhoto.Image = img;

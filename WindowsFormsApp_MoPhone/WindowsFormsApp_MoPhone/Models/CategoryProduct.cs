@@ -7,34 +7,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WindowsFormsApp2.Models
+namespace WindowsFormsApp_MoPhone.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Product
+    public partial class CategoryProduct
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Product()
+        public CategoryProduct()
         {
-            this.ProductDetails = new HashSet<ProductDetail>();
+            this.Products = new HashSet<Product>();
         }
     
-        public int id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
-        public Nullable<int> Quantity { get; set; }
-        public Nullable<System.DateTime> ProductDate { get; set; }
-        public Nullable<decimal> UnitPrice { get; set; }
         public string Description { get; set; }
-        public byte[] Images { get; set; }
-        public Nullable<int> SupplierId { get; set; }
-        public Nullable<int> CategoryId { get; set; }
-        public Nullable<int> DiscountId { get; set; }
     
-        public virtual CategoryProduct CategoryProduct { get; set; }
-        public virtual Discount Discount { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProductDetail> ProductDetails { get; set; }
-        public virtual Supplier Supplier { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

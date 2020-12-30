@@ -12,15 +12,14 @@ namespace WindowsFormsApp2.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ProductDetail
+    public partial class RoleDetail
     {
         public int Id { get; set; }
-        public Nullable<int> Quantity { get; set; }
-        public Nullable<decimal> UnitPrice { get; set; }
-        public Nullable<int> OrderId { get; set; }
-        public Nullable<int> ProductId { get; set; }
+        public string NameAction { get; set; }
+        public Nullable<int> IdUser { get; set; }
+        public Nullable<int> IdRole { get; set; }
     
-        public virtual Order Order { get; set; }
-        public virtual Product Product { get; set; }
+        public virtual Role Role { get; set; }
+        public virtual User User { get; set; }
     }
 }
