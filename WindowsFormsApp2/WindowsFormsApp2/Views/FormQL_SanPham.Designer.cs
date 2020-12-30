@@ -49,6 +49,10 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.cbGiamGia = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtMoTa = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbPhoto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListSanPham)).BeginInit();
             this.SuspendLayout();
@@ -130,7 +134,7 @@
             // cbNhaCungCap
             // 
             this.cbNhaCungCap.FormattingEnabled = true;
-            this.cbNhaCungCap.Location = new System.Drawing.Point(111, 150);
+            this.cbNhaCungCap.Location = new System.Drawing.Point(111, 170);
             this.cbNhaCungCap.Name = "cbNhaCungCap";
             this.cbNhaCungCap.Size = new System.Drawing.Size(233, 21);
             this.cbNhaCungCap.TabIndex = 12;
@@ -138,7 +142,7 @@
             // cbLoai
             // 
             this.cbLoai.FormattingEnabled = true;
-            this.cbLoai.Location = new System.Drawing.Point(111, 181);
+            this.cbLoai.Location = new System.Drawing.Point(111, 197);
             this.cbLoai.Name = "cbLoai";
             this.cbLoai.Size = new System.Drawing.Size(233, 21);
             this.cbLoai.TabIndex = 13;
@@ -214,7 +218,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 158);
+            this.label6.Location = new System.Drawing.Point(12, 178);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(45, 13);
             this.label6.TabIndex = 22;
@@ -223,11 +227,44 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(12, 184);
+            this.label7.Location = new System.Drawing.Point(12, 205);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(91, 13);
             this.label7.TabIndex = 23;
             this.label7.Text = "Mã nhà cung cấp";
+            // 
+            // cbGiamGia
+            // 
+            this.cbGiamGia.FormattingEnabled = true;
+            this.cbGiamGia.Location = new System.Drawing.Point(111, 224);
+            this.cbGiamGia.Name = "cbGiamGia";
+            this.cbGiamGia.Size = new System.Drawing.Size(233, 21);
+            this.cbGiamGia.TabIndex = 24;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(12, 227);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(64, 13);
+            this.label8.TabIndex = 25;
+            this.label8.Text = "Mã giảm giá";
+            // 
+            // txtMoTa
+            // 
+            this.txtMoTa.Location = new System.Drawing.Point(111, 144);
+            this.txtMoTa.Name = "txtMoTa";
+            this.txtMoTa.Size = new System.Drawing.Size(233, 20);
+            this.txtMoTa.TabIndex = 26;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(12, 151);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(34, 13);
+            this.label9.TabIndex = 27;
+            this.label9.Text = "Mô tả";
             // 
             // FormQL_SanPham
             // 
@@ -235,6 +272,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(822, 475);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.txtMoTa);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.cbGiamGia);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -290,5 +331,9 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox cbGiamGia;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox txtMoTa;
+        private System.Windows.Forms.Label label9;
     }
 }

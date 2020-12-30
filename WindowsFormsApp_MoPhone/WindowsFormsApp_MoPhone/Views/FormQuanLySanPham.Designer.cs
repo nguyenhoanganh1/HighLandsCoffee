@@ -274,7 +274,6 @@
             this.dgvListSanPham.Name = "dgvListSanPham";
             this.dgvListSanPham.Size = new System.Drawing.Size(735, 172);
             this.dgvListSanPham.TabIndex = 43;
-            this.dgvListSanPham.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListSanPham_CellClick);
             // 
             // openFileDialog1
             // 

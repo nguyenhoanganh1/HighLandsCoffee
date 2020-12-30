@@ -8,6 +8,7 @@ using System.Linq;
 using System.Windows.Forms;
 using WindowsFormsApp_MoPhone.EnityDTO;
 using WindowsFormsApp_MoPhone.Models;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 
 namespace WindowsFormsApp_MoPhone.Views
@@ -129,6 +130,7 @@ namespace WindowsFormsApp_MoPhone.Views
                         productId.Quantity = Convert.ToInt32(txtSoLuong.Text);
                         productId.ProductDate = Convert.ToDateTime( txtNgay.Text);
                        // productId.UnitPrice = Convert.ToDecimal(txtGia.Text);
+                        productId.Description = txtMoTa.Text;
                         productId.Images = stream.ToArray();
                         productId.SupplierId = Convert.ToInt32(cbNhaCungCap.SelectedValue.ToString());
                         productId.CategoryId = Convert.ToInt32(cbLoai.SelectedValue.ToString());
@@ -138,11 +140,11 @@ namespace WindowsFormsApp_MoPhone.Views
                     else
                     {
                         Product product = new Product();
-                        
                         product.Name = txtTen.Text;
                         product.Quantity = Convert.ToInt32(txtSoLuong.Text);
                         product.ProductDate = Convert.ToDateTime(txtNgay.Text);
                        // product.UnitPrice = Convert.ToDecimal(txtGia.Text);
+                        productId.Description = txtMoTa.Text;
                         product.Images = stream.ToArray();
                         product.SupplierId = Convert.ToInt32(cbNhaCungCap.SelectedValue.ToString());
                         product.CategoryId = Convert.ToInt32(cbLoai.SelectedValue.ToString());
@@ -161,19 +163,26 @@ namespace WindowsFormsApp_MoPhone.Views
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            
-                Product productId = model.Products.FirstOrDefault(p => p.id.ToString() == txtId.Text);
-                if (productId != null)
+            using (QL_BanHangEntities _entity = new QL_BanHangEntities())
+            {
+                int id = Convert.ToInt32(txtId.Text);
+                Product product = _entity.Products.Find(id);
+                if (product != null)
                 {
-                    model.Products.Remove(productId);
-                    model.SaveChanges();
-                    MessageBox.Show("Xóa thành công");
+                    DialogResult dr = MessageBox.Show("Xác nhận xóa?", "Bạn Có muốn xóa không?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (dr == DialogResult.Yes)
+                    {
+                        _entity.Products.Remove(product);
+                        _entity.SaveChanges();
+                    }
+                    
                 }
                 else
-                {
-                    MessageBox.Show("Xóa Thất Bại");
-                }
-                Display();
+                    {
+                        MessageBox.Show("Xóa Thất Bại");
+                    }
+                    Display();
+            }
             
         }
 
@@ -185,29 +194,24 @@ namespace WindowsFormsApp_MoPhone.Views
         private void dgvListSanPham_CellClick(object sender, DataGridViewCellEventArgs e)
         {
 
-           // Product productId = model.Products.FirstOrDefault(x => x.id.ToString() == txtId.Text);
             if (dgvListSanPham.Rows.Count > 0)
-              {
-                    foreach (DataGridViewRow row in dgvListSanPham.SelectedRows) // foreach datagridview selected rows values  
-                    {
-                    txtId.Text = row.Cells[0].Value.ToString();
-                    txtTen.Text = row.Cells[1].Value.ToString();
-                    txtSoLuong.Text = row.Cells[2].Value.ToString();
-                    txtNgay.Text = row.Cells[3].Value.ToString();
-                    //txtGia.Text = dgvListSanPham.SelectedRows[0].Cells[5].Value.ToString();
-                    //txtMoTa.Text = dgvListSanPham.SelectedRows[0].Cells[5].Value.ToString(); 
-                    /*MemoryStream stream = new MemoryStream(productId.Images.ToArray());
-                    Image img = Image.FromStream(stream);
-                    pbPhoto.Image = img;*/
-                    cbLoai.SelectedIndex = cbLoai.FindStringExact(row.Cells[6].Value.ToString());
-                    cbNhaCungCap.SelectedIndex = cbNhaCungCap.FindStringExact(row.Cells[7].Value.ToString());
-                }
-               
-              }
-              else
-              {
-                   MessageBox.Show("Không có dữ liệu");
-              }           
+            {
+                txtId.Text = dgvListSanPham.SelectedRows[0].Cells[0].Value.ToString();
+                txtTen.Text = dgvListSanPham.SelectedRows[0].Cells[1].Value.ToString();
+                txtSoLuong.Text = dgvListSanPham.SelectedRows[0].Cells[2].Value.ToString();
+                txtNgay.Text = dgvListSanPham.SelectedRows[0].Cells[3].Value.ToString();
+                txtGia.Text = dgvListSanPham.SelectedRows[0].Cells[4].Value.ToString();
+                //txtMoTa = dgvListSanPham.SelectedRows[0].Cells[5].Value.ToString();
+                // hinh anh
+                var context = new QL_BanHangEntities();
+                Product product = context.Products.FirstOrDefault(p => p.id.ToString() == txtId.Text);
+                MemoryStream stream = new MemoryStream(product.Images.ToArray());
+                Image img = Image.FromStream(stream);
+                pbPhoto.Image = img;
+                cbLoai.SelectedIndex = cbLoai.FindStringExact(dgvListSanPham.SelectedRows[0].Cells[7].Value.ToString());
+                cbNhaCungCap.SelectedIndex = cbNhaCungCap.FindStringExact(dgvListSanPham.SelectedRows[0].Cells[8].Value.ToString());
+            }
+                     
         }
     }
 }

@@ -492,7 +492,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="QL_BanHangEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="QL_BanHangEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CategoryProducts" EntityType="Self.CategoryProduct" />
           <EntitySet Name="Customers" EntityType="Self.Customer" />
           <EntitySet Name="Discounts" EntityType="Self.Discount" />
@@ -543,7 +543,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="QL_BanHangModelStoreContainer" CdmEntityContainer="QL_BanHangEntities">
+        <EntityContainerMapping StorageEntityContainer="QL_BanHangModelStoreContainer" CdmEntityContainer="QL_BanHangEntities1">
           <EntitySetMapping Name="CategoryProducts">
             <EntityTypeMapping TypeName="QL_BanHangModel.CategoryProduct">
               <MappingFragment StoreEntitySet="CategoryProducts">

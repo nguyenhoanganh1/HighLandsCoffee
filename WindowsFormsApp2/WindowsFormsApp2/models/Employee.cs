@@ -19,5 +19,7 @@ namespace WindowsFormsApp2.Models
         public string Name { get; set; }
         public string PhoneNumber { get; set; }
         public Nullable<decimal> Salary { get; set; }
+        public string UserName { get; internal set; }
+        public string Password { get; internal set; }
     }
 }

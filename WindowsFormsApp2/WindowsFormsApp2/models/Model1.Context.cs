@@ -13,10 +13,10 @@ namespace WindowsFormsApp2.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class QL_BanHangEntities : DbContext
+    public partial class QL_BanHangEntities1 : DbContext
     {
-        public QL_BanHangEntities()
-            : base("name=QL_BanHangEntities")
+        public QL_BanHangEntities1()
+            : base("name=QL_BanHangEntities1")
         {
         }
     
