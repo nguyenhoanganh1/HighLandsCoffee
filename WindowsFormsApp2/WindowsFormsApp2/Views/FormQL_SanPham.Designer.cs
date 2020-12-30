@@ -37,7 +37,6 @@
             this.btnThoat = new System.Windows.Forms.Button();
             this.pbPhoto = new System.Windows.Forms.PictureBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.cbNhaCungCap = new System.Windows.Forms.ComboBox();
             this.cbLoai = new System.Windows.Forms.ComboBox();
             this.dtpNgay = new System.Windows.Forms.DateTimePicker();
@@ -50,8 +49,11 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.cbGiamGia = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtMoTa = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbPhoto)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListSanPham)).BeginInit();
             this.SuspendLayout();
             // 
@@ -78,7 +80,7 @@
             // 
             // btnMoFile
             // 
-            this.btnMoFile.Location = new System.Drawing.Point(362, 205);
+            this.btnMoFile.Location = new System.Drawing.Point(373, 205);
             this.btnMoFile.Name = "btnMoFile";
             this.btnMoFile.Size = new System.Drawing.Size(87, 23);
             this.btnMoFile.TabIndex = 5;
@@ -118,9 +120,9 @@
             // 
             // pbPhoto
             // 
-            this.pbPhoto.Location = new System.Drawing.Point(362, 20);
+            this.pbPhoto.Location = new System.Drawing.Point(505, 12);
             this.pbPhoto.Name = "pbPhoto";
-            this.pbPhoto.Size = new System.Drawing.Size(181, 142);
+            this.pbPhoto.Size = new System.Drawing.Size(256, 185);
             this.pbPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbPhoto.TabIndex = 9;
             this.pbPhoto.TabStop = false;
@@ -129,19 +131,10 @@
             // 
             this.openFileDialog1.FileName = " ";
             // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Location = new System.Drawing.Point(580, 20);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(180, 142);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 11;
-            this.pictureBox2.TabStop = false;
-            // 
             // cbNhaCungCap
             // 
             this.cbNhaCungCap.FormattingEnabled = true;
-            this.cbNhaCungCap.Location = new System.Drawing.Point(111, 150);
+            this.cbNhaCungCap.Location = new System.Drawing.Point(111, 170);
             this.cbNhaCungCap.Name = "cbNhaCungCap";
             this.cbNhaCungCap.Size = new System.Drawing.Size(233, 21);
             this.cbNhaCungCap.TabIndex = 12;
@@ -149,7 +142,7 @@
             // cbLoai
             // 
             this.cbLoai.FormattingEnabled = true;
-            this.cbLoai.Location = new System.Drawing.Point(111, 181);
+            this.cbLoai.Location = new System.Drawing.Point(111, 197);
             this.cbLoai.Name = "cbLoai";
             this.cbLoai.Size = new System.Drawing.Size(233, 21);
             this.cbLoai.TabIndex = 13;
@@ -164,9 +157,9 @@
             // dgvListSanPham
             // 
             this.dgvListSanPham.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvListSanPham.Location = new System.Drawing.Point(12, 250);
+            this.dgvListSanPham.Location = new System.Drawing.Point(23, 262);
             this.dgvListSanPham.Name = "dgvListSanPham";
-            this.dgvListSanPham.Size = new System.Drawing.Size(748, 188);
+            this.dgvListSanPham.Size = new System.Drawing.Size(787, 188);
             this.dgvListSanPham.TabIndex = 15;
             this.dgvListSanPham.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListSanPham_CellClick);
             // 
@@ -225,7 +218,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 158);
+            this.label6.Location = new System.Drawing.Point(12, 178);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(45, 13);
             this.label6.TabIndex = 22;
@@ -234,17 +227,55 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(12, 184);
+            this.label7.Location = new System.Drawing.Point(12, 205);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(91, 13);
             this.label7.TabIndex = 23;
             this.label7.Text = "Mã nhà cung cấp";
             // 
+            // cbGiamGia
+            // 
+            this.cbGiamGia.FormattingEnabled = true;
+            this.cbGiamGia.Location = new System.Drawing.Point(111, 224);
+            this.cbGiamGia.Name = "cbGiamGia";
+            this.cbGiamGia.Size = new System.Drawing.Size(233, 21);
+            this.cbGiamGia.TabIndex = 24;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(12, 227);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(64, 13);
+            this.label8.TabIndex = 25;
+            this.label8.Text = "Mã giảm giá";
+            // 
+            // txtMoTa
+            // 
+            this.txtMoTa.Location = new System.Drawing.Point(111, 144);
+            this.txtMoTa.Name = "txtMoTa";
+            this.txtMoTa.Size = new System.Drawing.Size(233, 20);
+            this.txtMoTa.TabIndex = 26;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(12, 151);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(34, 13);
+            this.label9.TabIndex = 27;
+            this.label9.Text = "Mô tả";
+            // 
             // FormQL_SanPham
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.AutoScroll = true;
+            this.ClientSize = new System.Drawing.Size(822, 475);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.txtMoTa);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.cbGiamGia);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -257,7 +288,6 @@
             this.Controls.Add(this.dtpNgay);
             this.Controls.Add(this.cbLoai);
             this.Controls.Add(this.cbNhaCungCap);
-            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pbPhoto);
             this.Controls.Add(this.btnThoat);
             this.Controls.Add(this.btnXoa);
@@ -267,10 +297,11 @@
             this.Controls.Add(this.txtSoLuong);
             this.Controls.Add(this.txtTen);
             this.Name = "FormQL_SanPham";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FormQL_SanPham";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FormQL_SanPham_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbPhoto)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListSanPham)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -288,7 +319,6 @@
         private System.Windows.Forms.Button btnThoat;
         private System.Windows.Forms.PictureBox pbPhoto;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.ComboBox cbNhaCungCap;
         private System.Windows.Forms.ComboBox cbLoai;
         private System.Windows.Forms.DateTimePicker dtpNgay;
@@ -301,5 +331,9 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox cbGiamGia;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox txtMoTa;
+        private System.Windows.Forms.Label label9;
     }
 }

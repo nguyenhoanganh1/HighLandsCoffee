@@ -4,22 +4,27 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d1abdd46bd6d4f46a31abe8d21a3748e" Name="Diagram1">
-        <EntityTypeShape EntityType="QL_BanHangModel.Bill" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_BanHangModel.CategoryProduct" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_BanHangModel.Customer" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_BanHangModel.Employee" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_BanHangModel.Order" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_BanHangModel.ProductDetail" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+      <Diagram DiagramId="d03237b08da64fcfbd092a61d2739f8f" Name="Diagram1">
+        <EntityTypeShape EntityType="QL_BanHangModel.CategoryProduct" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_BanHangModel.Customer" Width="1.5" PointX="0.75" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_BanHangModel.Discount" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_BanHangModel.Employee" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_BanHangModel.Order" Width="1.5" PointX="3" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_BanHangModel.ProductDetail" Width="1.5" PointX="5.25" PointY="1.625" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_BanHangModel.Product" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_BanHangModel.Supplier" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_BanHangModel.sysdiagram" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <AssociationConnector Association="QL_BanHangModel.FK_ProductDetails_Bills" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="QL_BanHangModel.Role" Width="1.5" PointX="2.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_BanHangModel.RoleDetail" Width="1.5" PointX="5" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_BanHangModel.Supplier" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_BanHangModel.sysdiagram" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_BanHangModel.User" Width="1.5" PointX="2.75" PointY="15.125" IsExpanded="true" />
         <AssociationConnector Association="QL_BanHangModel.FK_Products_CategoryProducts" ManuallyRouted="false" />
-        <AssociationConnector Association="QL_BanHangModel.FK_Orders_Employees" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_BanHangModel.FK_Orders_Customers" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_BanHangModel.FK_Products_Discount" ManuallyRouted="false" />
         <AssociationConnector Association="QL_BanHangModel.FK_ProductDetails_Orders" ManuallyRouted="false" />
         <AssociationConnector Association="QL_BanHangModel.FK_ProductDetails_Products" ManuallyRouted="false" />
         <AssociationConnector Association="QL_BanHangModel.FK_Products_Suppliers" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_BanHangModel.FK_RoleDetails_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_BanHangModel.FK_RoleDetails_User" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

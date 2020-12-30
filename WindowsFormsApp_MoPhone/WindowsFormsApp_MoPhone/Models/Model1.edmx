@@ -48,7 +48,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Address" Type="nvarchar" MaxLength="200" />
           <Property Name="OrderDate" Type="date" />
-          <Property Name="Amount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Amount" Type="money" />
           <Property Name="CustomerId" Type="int" />
         </EntityType>
         <EntityType Name="ProductDetails">
@@ -57,7 +57,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Quantity" Type="int" />
-          <Property Name="UnitPrice" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="UnitPrice" Type="money" />
           <Property Name="OrderId" Type="int" />
           <Property Name="ProductId" Type="int" />
         </EntityType>
@@ -68,8 +68,12 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" />
           <Property Name="Quantity" Type="int" />
+          <Property Name="Discount" Type="float" />
           <Property Name="ProductDate" Type="date" />
-          <Property Name="UnitPrice" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="UnitPrice" Type="money" />
+          <Property Name="DateDiscountEnd" Type="date" />
+          <Property Name="DateDiscountStart" Type="date" />
+          <Property Name="TimeGuarantee" Type="nvarchar" MaxLength="50" />
           <Property Name="Description" Type="nvarchar" MaxLength="300" />
           <Property Name="Images" Type="image" />
           <Property Name="SupplierId" Type="int" />
@@ -312,7 +316,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="OrderDate" Type="DateTime" Precision="0" />
-          <Property Name="Amount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="CustomerId" Type="Int32" />
           <NavigationProperty Name="Customer" Relationship="Self.FK_Orders_Customers" FromRole="Orders" ToRole="Customers" />
           <NavigationProperty Name="ProductDetails" Relationship="Self.FK_ProductDetails_Orders" FromRole="Orders" ToRole="ProductDetails" />
@@ -323,7 +327,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Quantity" Type="Int32" />
-          <Property Name="UnitPrice" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="UnitPrice" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="OrderId" Type="Int32" />
           <Property Name="ProductId" Type="Int32" />
           <NavigationProperty Name="Order" Relationship="Self.FK_ProductDetails_Orders" FromRole="ProductDetails" ToRole="Orders" />
@@ -336,15 +340,19 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Quantity" Type="Int32" />
+          <Property Name="Discount" Type="Double" />
           <Property Name="ProductDate" Type="DateTime" Precision="0" />
-          <Property Name="UnitPrice" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="UnitPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="DateDiscountEnd" Type="DateTime" Precision="0" />
+          <Property Name="DateDiscountStart" Type="DateTime" Precision="0" />
+          <Property Name="TimeGuarantee" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="Images" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="SupplierId" Type="Int32" />
           <Property Name="CategoryId" Type="Int32" />
           <Property Name="DiscountId" Type="Int32" />
           <NavigationProperty Name="CategoryProduct" Relationship="Self.FK_Products_CategoryProducts" FromRole="Products" ToRole="CategoryProducts" />
-          <NavigationProperty Name="Discount" Relationship="Self.FK_Products_Discount" FromRole="Products" ToRole="Discount" />
+          <NavigationProperty Name="Discount1" Relationship="Self.FK_Products_Discount" FromRole="Products" ToRole="Discount" />
           <NavigationProperty Name="ProductDetails" Relationship="Self.FK_ProductDetails_Products" FromRole="Products" ToRole="ProductDetails" />
           <NavigationProperty Name="Supplier" Relationship="Self.FK_Products_Suppliers" FromRole="Products" ToRole="Suppliers" />
         </EntityType>
@@ -492,7 +500,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="QL_BanHangEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="QL_BanHangEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CategoryProducts" EntityType="Self.CategoryProduct" />
           <EntitySet Name="Customers" EntityType="Self.Customer" />
           <EntitySet Name="Discounts" EntityType="Self.Discount" />
@@ -543,7 +551,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="QL_BanHangModelStoreContainer" CdmEntityContainer="QL_BanHangEntities1">
+        <EntityContainerMapping StorageEntityContainer="QL_BanHangModelStoreContainer" CdmEntityContainer="QL_BanHangEntities">
           <EntitySetMapping Name="CategoryProducts">
             <EntityTypeMapping TypeName="QL_BanHangModel.CategoryProduct">
               <MappingFragment StoreEntitySet="CategoryProducts">
@@ -612,8 +620,12 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
                 <ScalarProperty Name="ProductDate" ColumnName="ProductDate" />
                 <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="DateDiscountEnd" ColumnName="DateDiscountEnd" />
+                <ScalarProperty Name="DateDiscountStart" ColumnName="DateDiscountStart" />
+                <ScalarProperty Name="TimeGuarantee" ColumnName="TimeGuarantee" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Images" ColumnName="Images" />
                 <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />

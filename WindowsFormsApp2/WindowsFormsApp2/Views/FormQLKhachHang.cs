@@ -9,7 +9,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+#pragma warning disable CS0234 // The type or namespace name 'Models' does not exist in the namespace 'WindowsFormsApp2' (are you missing an assembly reference?)
 using WindowsFormsApp2.Models;
+#pragma warning restore CS0234 // The type or namespace name 'Models' does not exist in the namespace 'WindowsFormsApp2' (are you missing an assembly reference?)
 
 namespace WindowsFormsApp2
 {
@@ -27,7 +29,7 @@ namespace WindowsFormsApp2
         }
         public void Display()   // Display Method is a common method to bind the Student details in datagridview after save,update and delete operation perform.
         {
-            using (QL_BanHangEntities _entity = new QL_BanHangEntities())
+            using (QL_BanHangEntities1 _entity = new QL_BanHangEntities1())
             {
                 List<CustomerDTO> _customerList = new List<CustomerDTO>();
                 _customerList = _entity.Customers.Select(x => new CustomerDTO
@@ -35,9 +37,7 @@ namespace WindowsFormsApp2
                     Id = x.Id,
                     Name = x.Name,
                     Address = x.Address,
-
-                    PhoneNumber = (int) x.Phone
-                    
+                   // (string) PhoneNumber = x.Phone
                 }).ToList();
                 dataGridView1.DataSource = _customerList;
             }
@@ -45,14 +45,14 @@ namespace WindowsFormsApp2
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            using (QL_BanHangEntities _entity = new QL_BanHangEntities())
+            using (QL_BanHangEntities1 _entity = new QL_BanHangEntities1())
             {
                 if (txtName.Text != "" && txtAddress.Text != "" && txtPhoneNumber.Text != "")
                 {                 
                     Customer cus = new Customer();                   
                     cus.Name = txtName.Text;                  
                     cus.Address = txtAddress.Text;
-                    cus.Phone = Convert.ToInt32(txtPhoneNumber.Text);               
+                    cus.Phone =  txtPhoneNumber.Text;               
                     SaveStudentDetails(cus);                     
                     Display();
                     Clear();                     
@@ -66,10 +66,12 @@ namespace WindowsFormsApp2
 
         }
         // THƯ VIỆN HÓA
+#pragma warning disable CS0246 // The type or namespace name 'Customer' could not be found (are you missing a using directive or an assembly reference?)
         public bool SaveStudentDetails(Customer cus)   
+#pragma warning restore CS0246 // The type or namespace name 'Customer' could not be found (are you missing a using directive or an assembly reference?)
         {
             bool result = false;
-            using (QL_BanHangEntities _entity = new QL_BanHangEntities())
+            using (QL_BanHangEntities1 _entity = new QL_BanHangEntities1())
             {
                 _entity.Customers.Add(cus);
                 _entity.SaveChanges();
@@ -90,7 +92,7 @@ namespace WindowsFormsApp2
         private void btnSua_Click(object sender, EventArgs e)
         {
          
-                using (QL_BanHangEntities _entity = new QL_BanHangEntities())
+                using (QL_BanHangEntities1 _entity = new QL_BanHangEntities1())
                 {
                   
                     if (txtName.Text == "" && txtAddress.Text == "" && txtPhoneNumber.Text == "")
@@ -118,13 +120,15 @@ namespace WindowsFormsApp2
            
 
         }
+#pragma warning disable CS0246 // The type or namespace name 'Customer' could not be found (are you missing a using directive or an assembly reference?)
         private Customer GetCustomer()
+#pragma warning restore CS0246 // The type or namespace name 'Customer' could not be found (are you missing a using directive or an assembly reference?)
         {
             Customer cus = new Customer();
                 cus.Id = Convert.ToInt32(txtId.Text);
                 cus.Name = txtName.Text;
                 cus.Address = txtAddress.Text;
-                cus.Phone = Convert.ToInt32(txtPhoneNumber.Text);
+                cus.Phone = txtPhoneNumber.Text;
                 return cus;
         }
 
@@ -142,7 +146,7 @@ namespace WindowsFormsApp2
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            using (QL_BanHangEntities _entity = new QL_BanHangEntities())
+            using (QL_BanHangEntities1 _entity = new QL_BanHangEntities1())
             {
                 if (txtName.Text == "" && txtAddress.Text == "" && txtPhoneNumber.Text == "")
                 {
