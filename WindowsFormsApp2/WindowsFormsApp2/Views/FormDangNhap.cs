@@ -22,20 +22,29 @@ namespace WindowsFormsApp2.Views
 
         private void btnDangNhap_Click(object sender, EventArgs e)
         {
-            using (var context = new QL_BanHangEntities1())
+            using (var context = new QL_BanHangEntities())
             {
                 Employee employee = new Employee();
                 employee.UserName = txtUserName.Text;
                 employee.Password = txtPassword.Text;
                 var id = context.Employees.Where(x => x.UserName == employee.UserName && x.Password == employee.Password);
                 foreach(var item in id)
-                {                   
-                    this.Hide();
-                    FormQLKhachHang form = new FormQLKhachHang();
-                    form.ShowDialog();
-                    this.Close();
+                {
+                    if (item != null)
+                    {
+                        MessageBox.Show("Đăng nhập thành công");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Vui lòng nhập đúng thông tin");
+                    }        
                 } 
             }
+        }
+
+        private void btnThoat_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

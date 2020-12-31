@@ -17,7 +17,7 @@ namespace WindowsFormsApp2
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormQL_SanPham());
+            Application.Run(new FormTrangChu());
         }
     }
 }

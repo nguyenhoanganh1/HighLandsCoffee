@@ -16,10 +16,10 @@ namespace WindowsFormsApp2.Models
     {
         public int Id { get; set; }
         public string NameAction { get; set; }
-        public Nullable<int> IdUser { get; set; }
+        public Nullable<int> IdEmployee { get; set; }
         public Nullable<int> IdRole { get; set; }
     
+        public virtual Employee Employee { get; set; }
         public virtual Role Role { get; set; }
-        public virtual User User { get; set; }
     }
 }

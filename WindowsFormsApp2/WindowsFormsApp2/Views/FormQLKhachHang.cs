@@ -29,15 +29,15 @@ namespace WindowsFormsApp2
         }
         public void Display()   // Display Method is a common method to bind the Student details in datagridview after save,update and delete operation perform.
         {
-            using (QL_BanHangEntities1 _entity = new QL_BanHangEntities1())
+            using (QL_BanHangEntities _entity = new QL_BanHangEntities())
             {
                 List<CustomerDTO> _customerList = new List<CustomerDTO>();
                 _customerList = _entity.Customers.Select(x => new CustomerDTO
                 {
                     Id = x.Id,
                     Name = x.Name,
-                    Address = x.Address,
-                   // (string) PhoneNumber = x.Phone
+                    Email = x.Email,
+                   PhoneNumber = x.Phone
                 }).ToList();
                 dataGridView1.DataSource = _customerList;
             }
@@ -45,13 +45,13 @@ namespace WindowsFormsApp2
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            using (QL_BanHangEntities1 _entity = new QL_BanHangEntities1())
+            using (QL_BanHangEntities _entity = new QL_BanHangEntities())
             {
                 if (txtName.Text != "" && txtAddress.Text != "" && txtPhoneNumber.Text != "")
                 {                 
                     Customer cus = new Customer();                   
                     cus.Name = txtName.Text;                  
-                    cus.Address = txtAddress.Text;
+                    cus.Email = txtAddress.Text;
                     cus.Phone =  txtPhoneNumber.Text;               
                     SaveStudentDetails(cus);                     
                     Display();
@@ -71,7 +71,7 @@ namespace WindowsFormsApp2
 #pragma warning restore CS0246 // The type or namespace name 'Customer' could not be found (are you missing a using directive or an assembly reference?)
         {
             bool result = false;
-            using (QL_BanHangEntities1 _entity = new QL_BanHangEntities1())
+            using (QL_BanHangEntities _entity = new QL_BanHangEntities())
             {
                 _entity.Customers.Add(cus);
                 _entity.SaveChanges();
@@ -92,7 +92,7 @@ namespace WindowsFormsApp2
         private void btnSua_Click(object sender, EventArgs e)
         {
          
-                using (QL_BanHangEntities1 _entity = new QL_BanHangEntities1())
+                using (QL_BanHangEntities _entity = new QL_BanHangEntities())
                 {
                   
                     if (txtName.Text == "" && txtAddress.Text == "" && txtPhoneNumber.Text == "")
@@ -127,7 +127,7 @@ namespace WindowsFormsApp2
             Customer cus = new Customer();
                 cus.Id = Convert.ToInt32(txtId.Text);
                 cus.Name = txtName.Text;
-                cus.Address = txtAddress.Text;
+                cus.Email = txtAddress.Text;
                 cus.Phone = txtPhoneNumber.Text;
                 return cus;
         }
@@ -146,7 +146,7 @@ namespace WindowsFormsApp2
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            using (QL_BanHangEntities1 _entity = new QL_BanHangEntities1())
+            using (QL_BanHangEntities _entity = new QL_BanHangEntities())
             {
                 if (txtName.Text == "" && txtAddress.Text == "" && txtPhoneNumber.Text == "")
                 {

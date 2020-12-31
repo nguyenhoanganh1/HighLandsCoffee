@@ -10,12 +10,12 @@ namespace WindowsFormsApp2
     {
         private int id;
         private string name;
-        private string address;
-        private int phoneNumber;
+        private string email;
+        private string phoneNumber;
 
         public int Id { get => id; set => id = value; }
         public string Name { get => name; set => name = value; }
-        public string Address { get => address; set => address = value; }
-        public int PhoneNumber { get => phoneNumber; set => phoneNumber = value; }
+        public string Email { get => email; set => email = value; }
+        public string PhoneNumber { get => phoneNumber; set => phoneNumber = value; }
     }
 }

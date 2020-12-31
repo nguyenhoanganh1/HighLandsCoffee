@@ -59,28 +59,28 @@
             // 
             // txtTen
             // 
-            this.txtTen.Location = new System.Drawing.Point(111, 46);
+            this.txtTen.Location = new System.Drawing.Point(111, 41);
             this.txtTen.Name = "txtTen";
             this.txtTen.Size = new System.Drawing.Size(233, 20);
             this.txtTen.TabIndex = 0;
             // 
             // txtSoLuong
             // 
-            this.txtSoLuong.Location = new System.Drawing.Point(111, 72);
+            this.txtSoLuong.Location = new System.Drawing.Point(111, 65);
             this.txtSoLuong.Name = "txtSoLuong";
             this.txtSoLuong.Size = new System.Drawing.Size(233, 20);
             this.txtSoLuong.TabIndex = 1;
             // 
             // txtGia
             // 
-            this.txtGia.Location = new System.Drawing.Point(111, 124);
+            this.txtGia.Location = new System.Drawing.Point(111, 118);
             this.txtGia.Name = "txtGia";
             this.txtGia.Size = new System.Drawing.Size(233, 20);
             this.txtGia.TabIndex = 2;
             // 
             // btnMoFile
             // 
-            this.btnMoFile.Location = new System.Drawing.Point(373, 205);
+            this.btnMoFile.Location = new System.Drawing.Point(517, 205);
             this.btnMoFile.Name = "btnMoFile";
             this.btnMoFile.Size = new System.Drawing.Size(87, 23);
             this.btnMoFile.TabIndex = 5;
@@ -90,7 +90,7 @@
             // 
             // btnLuu
             // 
-            this.btnLuu.Location = new System.Drawing.Point(466, 205);
+            this.btnLuu.Location = new System.Drawing.Point(406, 248);
             this.btnLuu.Name = "btnLuu";
             this.btnLuu.Size = new System.Drawing.Size(87, 23);
             this.btnLuu.TabIndex = 6;
@@ -100,7 +100,7 @@
             // 
             // btnXoa
             // 
-            this.btnXoa.Location = new System.Drawing.Point(569, 205);
+            this.btnXoa.Location = new System.Drawing.Point(517, 248);
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(87, 23);
             this.btnXoa.TabIndex = 7;
@@ -110,7 +110,7 @@
             // 
             // btnThoat
             // 
-            this.btnThoat.Location = new System.Drawing.Point(674, 205);
+            this.btnThoat.Location = new System.Drawing.Point(642, 248);
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.Size = new System.Drawing.Size(87, 23);
             this.btnThoat.TabIndex = 8;
@@ -120,7 +120,7 @@
             // 
             // pbPhoto
             // 
-            this.pbPhoto.Location = new System.Drawing.Point(505, 12);
+            this.pbPhoto.Location = new System.Drawing.Point(437, 6);
             this.pbPhoto.Name = "pbPhoto";
             this.pbPhoto.Size = new System.Drawing.Size(256, 185);
             this.pbPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -149,7 +149,7 @@
             // 
             // dtpNgay
             // 
-            this.dtpNgay.Location = new System.Drawing.Point(111, 99);
+            this.dtpNgay.Location = new System.Drawing.Point(111, 92);
             this.dtpNgay.Name = "dtpNgay";
             this.dtpNgay.Size = new System.Drawing.Size(233, 20);
             this.dtpNgay.TabIndex = 14;
@@ -157,15 +157,15 @@
             // dgvListSanPham
             // 
             this.dgvListSanPham.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvListSanPham.Location = new System.Drawing.Point(23, 262);
+            this.dgvListSanPham.Location = new System.Drawing.Point(23, 277);
             this.dgvListSanPham.Name = "dgvListSanPham";
-            this.dgvListSanPham.Size = new System.Drawing.Size(787, 188);
+            this.dgvListSanPham.Size = new System.Drawing.Size(787, 173);
             this.dgvListSanPham.TabIndex = 15;
             this.dgvListSanPham.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListSanPham_CellClick);
             // 
             // txtId
             // 
-            this.txtId.Location = new System.Drawing.Point(111, 20);
+            this.txtId.Location = new System.Drawing.Point(111, 12);
             this.txtId.Name = "txtId";
             this.txtId.Size = new System.Drawing.Size(233, 20);
             this.txtId.TabIndex = 16;
@@ -173,7 +173,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 26);
+            this.label1.Location = new System.Drawing.Point(12, 18);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(74, 13);
             this.label1.TabIndex = 17;
@@ -182,7 +182,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 99);
+            this.label2.Location = new System.Drawing.Point(12, 97);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(32, 13);
             this.label2.TabIndex = 18;
@@ -191,7 +191,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 75);
+            this.label3.Location = new System.Drawing.Point(12, 72);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 13);
             this.label3.TabIndex = 19;
@@ -200,7 +200,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 49);
+            this.label4.Location = new System.Drawing.Point(12, 44);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(78, 13);
             this.label4.TabIndex = 20;
@@ -209,7 +209,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 127);
+            this.label5.Location = new System.Drawing.Point(12, 121);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(23, 13);
             this.label5.TabIndex = 21;
@@ -270,7 +270,6 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(822, 475);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.txtMoTa);
@@ -297,9 +296,8 @@
             this.Controls.Add(this.txtSoLuong);
             this.Controls.Add(this.txtTen);
             this.Name = "FormQL_SanPham";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormQL_SanPham";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FormQL_SanPham_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbPhoto)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListSanPham)).EndInit();
