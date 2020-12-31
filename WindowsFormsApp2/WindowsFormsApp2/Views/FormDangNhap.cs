@@ -4,17 +4,19 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-#pragma warning disable CS0234 // The type or namespace name 'Models' does not exist in the namespace 'WindowsFormsApp2' (are you missing an assembly reference?)
 using WindowsFormsApp2.Models;
-#pragma warning restore CS0234 // The type or namespace name 'Models' does not exist in the namespace 'WindowsFormsApp2' (are you missing an assembly reference?)
 
 namespace WindowsFormsApp2.Views
 {
     public partial class FormDangNhap : Form
     {
+        public event ChungThucTaiKhoan chungThucTaiKhoan;
+        public delegate void ChungThucTaiKhoan(object sender);
+
         public FormDangNhap()
         {
             InitializeComponent();
@@ -22,29 +24,67 @@ namespace WindowsFormsApp2.Views
 
         private void btnDangNhap_Click(object sender, EventArgs e)
         {
-            using (var context = new QL_BanHangEntities())
+            if (KiemTraInput())
             {
-                Employee employee = new Employee();
-                employee.UserName = txtUserName.Text;
-                employee.Password = txtPassword.Text;
-                var id = context.Employees.Where(x => x.UserName == employee.UserName && x.Password == employee.Password);
-                foreach(var item in id)
-                {
-                    if (item != null)
+                using (var context = new QL_BanHangEntities())
+                {                  
+                    string userName = txtUserName.Text;
+                    string password = MD5Hash(txtPassword.Text);
+                    var id = context.Employees.Where(x => x.UserName == userName && x.Password == password);
+                    foreach(var item in id)
                     {
-                        MessageBox.Show("Đăng nhập thành công");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Vui lòng nhập đúng thông tin");
-                    }        
+                        if (item != null)
+                        {
+                            MessageBox.Show("Đăng nhập thành công");
+                            chungThucTaiKhoan(item);
+                            this.Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Vui lòng nhập đúng thông tin");
+                            return;
+                        } 
+                    }     
                 } 
             }
         }
 
+        private string MD5Hash(string text)
+        {
+            MD5 md5 = new MD5CryptoServiceProvider();
+
+            //compute hash from the bytes of text  
+            md5.ComputeHash(ASCIIEncoding.ASCII.GetBytes(text));
+
+            //get hash result after compute it  
+            byte[] result = md5.Hash;
+
+            StringBuilder strBuilder = new StringBuilder();
+            for (int i = 0; i < result.Length; i++)
+            {
+                //change it into 2 hexadecimal digits  
+                //for each byte  
+                strBuilder.Append(result[i].ToString("x2"));
+            }
+
+            return strBuilder.ToString();
+        }
+
+        private bool KiemTraInput()
+        {
+
+            if (string.IsNullOrWhiteSpace(txtUserName.Text) || string.IsNullOrWhiteSpace(txtUserName.Text))
+            {
+                MessageBox.Show("Vui lòng nhập thông tin");
+                return false;
+            }
+            return true;
+        }
+
+
         private void btnThoat_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            this.Close();
         }
     }
 }
