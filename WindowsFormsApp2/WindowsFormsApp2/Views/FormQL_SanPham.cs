@@ -24,7 +24,7 @@ namespace WindowsFormsApp2.Views
            try
             {
                 SettingForm();
-                using(var context = new QL_BanHangEntities1())
+                using(var context = new QL_BanHangEntities())
                 {                   
                     List<CategoryProduct> categoryProducts = context.CategoryProducts.ToList();
                     List<Supplier> suppliers = context.Suppliers.ToList();
@@ -54,7 +54,7 @@ namespace WindowsFormsApp2.Views
 
         public void Display()   
         {
-            using (var _entity = new QL_BanHangEntities1())
+            using (var _entity = new QL_BanHangEntities())
             {
                 List<ProductDTO2> _studentList = new List<ProductDTO2>();
                 _studentList = _entity.Products.Select(x => new ProductDTO2
@@ -91,24 +91,7 @@ namespace WindowsFormsApp2.Views
             this.cbLoai.ValueMember = "Id";
             this.cbLoai.DisplayMember = "Name";
         }
-
-        private void BindGrid(List<Product> products)
-        {
-            dgvListSanPham.Rows.Clear();
-            foreach (var item in products)
-            {
-                int index = dgvListSanPham.Rows.Add();
-                dgvListSanPham.Rows[index].Cells[0].Value = item.id;
-                dgvListSanPham.Rows[index].Cells[1].Value = item.Name;
-                dgvListSanPham.Rows[index].Cells[2].Value = item.Quantity;
-                dgvListSanPham.Rows[index].Cells[3].Value = item.ProductDate;
-                dgvListSanPham.Rows[index].Cells[4].Value = item.UnitPrice;
-                dgvListSanPham.Rows[index].Cells[5].Value = item.Images;
-                dgvListSanPham.Rows[index].Cells[6].Value = item.CategoryProduct.Name;
-                dgvListSanPham.Rows[index].Cells[7].Value = item.Supplier.Name;
-                dgvListSanPham.Rows[index].Cells[8].Value = item.Discount.Name;
-            } 
-        }
+ 
 
         private void btnMoFile_Click(object sender, EventArgs e)
         {
@@ -141,10 +124,15 @@ namespace WindowsFormsApp2.Views
         {
             try
             {
-                using (QL_BanHangEntities1 context = new QL_BanHangEntities1())
+                using (QL_BanHangEntities context = new QL_BanHangEntities())
                 {
-                    MemoryStream stream = new MemoryStream();
+                    
+                    MemoryStream stream = new MemoryStream();         
                     pbPhoto.Image.Save(stream, ImageFormat.Jpeg);
+                
+                
+                   
+
                     Product productId = context.Products.FirstOrDefault(p => p.id.ToString() == txtId.Text);
                 
                 if (productId != null)
@@ -172,14 +160,14 @@ namespace WindowsFormsApp2.Views
                         product.Quantity = Convert.ToInt32(txtSoLuong.Text);
                         product.ProductDate = Convert.ToDateTime(dtpNgay.Text);
                         product.UnitPrice = Convert.ToDecimal(txtGia.Text);
-                        productId.Description = txtMoTa.Text;
+                        product.Description = txtMoTa.Text;
                         product.Images = stream.ToArray();
                         product.SupplierId = Convert.ToInt32(cbNhaCungCap.SelectedValue.ToString());
                         product.CategoryId = Convert.ToInt32(cbLoai.SelectedValue.ToString());
                         product.DiscountId = Convert.ToInt32(cbGiamGia.SelectedValue.ToString());
                         context.Products.Add(product);
                         context.SaveChanges();
-                        MessageBox.Show("Thếm thành công");
+                        MessageBox.Show("Thêm sản phẩm thành công");
                     }      
                 }
                 Display();
@@ -187,7 +175,7 @@ namespace WindowsFormsApp2.Views
             catch (Exception ex)
             { 
                 MessageBox.Show(ex.Message);
-            }           
+            }          
         }
 
         private void btnThoat_Click(object sender, EventArgs e)
@@ -197,7 +185,7 @@ namespace WindowsFormsApp2.Views
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            using (var context = new QL_BanHangEntities1())
+            using (var context = new QL_BanHangEntities())
             {
                 Product productId = context.Products.FirstOrDefault(p => p.id.ToString() == txtId.Text);
                         if (productId != null)
@@ -219,25 +207,33 @@ namespace WindowsFormsApp2.Views
 
         private void dgvListSanPham_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-      
-            if (dgvListSanPham.Rows.Count > 0)
+            try
             {
-                txtId.Text = dgvListSanPham.SelectedRows[0].Cells[0].Value.ToString();
-                txtTen.Text = dgvListSanPham.SelectedRows[0].Cells[1].Value.ToString();
-                txtSoLuong.Text = dgvListSanPham.SelectedRows[0].Cells[2].Value.ToString();
-                dtpNgay.Text = dgvListSanPham.SelectedRows[0].Cells[3].Value.ToString();
-                txtGia.Text = dgvListSanPham.SelectedRows[0].Cells[4].Value.ToString();
-                txtMoTa.Text = dgvListSanPham.SelectedRows[0].Cells[5].Value.ToString();
-                // hinh anh
-                var context = new QL_BanHangEntities1();
-                Product product = context.Products.FirstOrDefault(p => p.id.ToString() == txtId.Text);
-                MemoryStream stream = new MemoryStream(product.Images.ToArray());
-                Image img = Image.FromStream(stream);
-                pbPhoto.Image = img;
-                cbLoai.SelectedIndex = cbLoai.FindStringExact(dgvListSanPham.SelectedRows[0].Cells[7].Value.ToString());
-                cbNhaCungCap.SelectedIndex = cbNhaCungCap.FindStringExact(dgvListSanPham.SelectedRows[0].Cells[8].Value.ToString());
-                cbGiamGia.SelectedIndex = cbGiamGia.FindStringExact(dgvListSanPham.SelectedRows[0].Cells[9].Value.ToString());
+                if (dgvListSanPham.Rows.Count > 0)
+                {
+                    txtId.Text = dgvListSanPham.SelectedRows[0].Cells[0].Value.ToString();
+                    txtTen.Text = dgvListSanPham.SelectedRows[0].Cells[1].Value.ToString();
+                    txtSoLuong.Text = dgvListSanPham.SelectedRows[0].Cells[2].Value.ToString();
+                    dtpNgay.Text = dgvListSanPham.SelectedRows[0].Cells[3].Value.ToString();
+                    txtGia.Text = dgvListSanPham.SelectedRows[0].Cells[4].Value.ToString();
+                    txtMoTa.Text = dgvListSanPham.SelectedRows[0].Cells[5].Value.ToString();
+                    // hinh anh
+                    var context = new QL_BanHangEntities();
+                    Product product = context.Products.FirstOrDefault(p => p.id.ToString() == txtId.Text);
+                    MemoryStream stream = new MemoryStream(product.Images.ToArray());
+                    Image img = Image.FromStream(stream);
+                    pbPhoto.Image = img;
+                    cbLoai.SelectedIndex = cbLoai.FindStringExact(dgvListSanPham.SelectedRows[0].Cells[7].Value.ToString());
+                    cbNhaCungCap.SelectedIndex = cbNhaCungCap.FindStringExact(dgvListSanPham.SelectedRows[0].Cells[8].Value.ToString());
+                    cbGiamGia.SelectedIndex = cbGiamGia.FindStringExact(dgvListSanPham.SelectedRows[0].Cells[9].Value.ToString());
+                }
             }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            } 
+            
         }
     }
 }
