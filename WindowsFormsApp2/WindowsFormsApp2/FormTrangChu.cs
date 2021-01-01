@@ -7,12 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindowsFormsApp2.Models;
 using WindowsFormsApp2.Views;
 
 namespace WindowsFormsApp2
 {
     public partial class FormTrangChu : Form
     {
+        private string tendangnhap;
+        List<string> DanhSachQuyen;
         public FormTrangChu()
         {
             InitializeComponent();
@@ -21,20 +24,26 @@ namespace WindowsFormsApp2
         private void tsmQuanLySanPham_Click(object sender, EventArgs e)
         {
             string name = "tsmQuanLySanPham";
-            HienThiQuanLySanPham(name);
+            HienThiFormQuanLySanPham(name);
         }
 
         private void tsmDangNhap_Click(object sender, EventArgs e)
         {
             string name = "tsmDangNhap";
-            KhoaChucNangHeThong();
-            HienThiDangNhap(name);
+            KhoaChucNangHeThong(false);
+            HienThiFormDangNhap(name);
         }
        
-        private void KhoaChucNangHeThong()
+        private void KhoaChucNangHeThong(bool islock)
         {
-
+            // Cài đặt trạng thai
+            tsmTaoTaiKhoan.Enabled = islock;
+            tsmDanhMucQuanLy.Enabled = islock;
+            tsmDangXuat.Enabled = islock;
+            tsmDangNhap.Enabled = !islock;
+            tsmThongKe.Enabled = islock;
         }
+
         private bool HienThiForm(string nameForm)
         {
             Form form = this.MdiChildren.Where(f => f.Name == nameForm).FirstOrDefault();
@@ -46,26 +55,49 @@ namespace WindowsFormsApp2
             return false;
         }
 
-        private void HienThiQuanLySanPham(string name)
+        private void HienThiFormQuanLySanPham(string name)
         {
             if(!HienThiForm(name))
             {
                 FormQL_SanPham formQL_SanPham = new FormQL_SanPham();
                 formQL_SanPham.MdiParent = this;
                 formQL_SanPham.Show();
-            }
             
+            }
+
+           
         }
 
-        private void HienThiDangNhap(string name)
+        private void HienThiFormDangNhap(string name)
         {
             if (!HienThiForm(name))
             {
                 FormDangNhap formDangNhap = new FormDangNhap();
                 formDangNhap.MdiParent = this;
-                formDangNhap.chungThucTaiKhoan += formDangNhap.chungThucTaiKhoan;
+                formDangNhap.chungThucTaiKhoan += ChungThucTaiKhoan;
                 formDangNhap.Show();
             }
+        }
+
+        private void HienThiFormDatHang(string name)
+        {
+            if (!HienThiForm(name))
+            {
+                FormDatHang formDatHang = new FormDatHang();
+                formDatHang.MdiParent = this;
+                formDatHang.Show();
+            }
+        }
+
+        private void ChungThucTaiKhoan(object sender)
+        {
+            Employee employee = (Employee)sender;
+            // lấy danh sách các quyền 
+            tendangnhap = employee.Name;
+            this.Text = "Hello " + tendangnhap;
+            DanhSachQuyen = employee.RoleDetails.Select(x => x.Role.NameRole).ToList();
+            KhoaChucNangHeThong(true);
+          
         }
 
         private void tsmThoat_Click(object sender, EventArgs e)
@@ -75,7 +107,26 @@ namespace WindowsFormsApp2
 
         private void FormTrangChu_Load(object sender, EventArgs e)
         {
+
+            KhoaChucNangHeThong(false);
+         
+        }
+
+        private void tsmDangXuat_Click(object sender, EventArgs e)
+        {
+            foreach (var item in this.MdiChildren)
+            {
+                item.Close(); 
+               
+            }
             this.Text = "Hello ";
+            KhoaChucNangHeThong(false);
+            MessageBox.Show("Đăng xuất thành công");
+        }
+
+        private void tsmTrangChu_Click(object sender, EventArgs e)
+        {
+            HienThiFormDatHang("tsmDatHang");
         }
     }
 }

@@ -30,13 +30,11 @@ namespace WindowsFormsApp2.Views
                 {                  
                     string userName = txtUserName.Text;
                     string password = MD5Hash(txtPassword.Text);
-                    var id = context.Employees.Where(x => x.UserName == userName && x.Password == password);
-                    foreach(var item in id)
-                    {
-                        if (item != null)
+                    Employee employee = context.Employees.Where(x => x.UserName == userName && x.Password == password).FirstOrDefault();
+                    
+                       if (employee != null)
                         {
-                            MessageBox.Show("Đăng nhập thành công");
-                            chungThucTaiKhoan(item);
+                            chungThucTaiKhoan(employee);
                             this.Close();
                         }
                         else
@@ -44,7 +42,7 @@ namespace WindowsFormsApp2.Views
                             MessageBox.Show("Vui lòng nhập đúng thông tin");
                             return;
                         } 
-                    }     
+                        
                 } 
             }
         }
@@ -80,7 +78,6 @@ namespace WindowsFormsApp2.Views
             }
             return true;
         }
-
 
         private void btnThoat_Click(object sender, EventArgs e)
         {
