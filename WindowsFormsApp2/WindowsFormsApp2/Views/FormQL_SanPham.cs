@@ -14,7 +14,7 @@ namespace WindowsFormsApp2.Views
     {
         
         private Image image;
-
+     
         public FormQL_SanPham()
         {
             InitializeComponent();
@@ -23,6 +23,7 @@ namespace WindowsFormsApp2.Views
         {
            try
             {
+                 CaiDatQuyen();
                 SettingForm();
                 using(var context = new QL_BanHangEntities())
                 {                   
@@ -32,8 +33,9 @@ namespace WindowsFormsApp2.Views
                     FillDiscount(discounts);
                     FillCategory(categoryProducts);
                     FillSupplier(suppliers);
-                }
                     
+                }
+               
                 Display();
             }
             catch (Exception ex)
@@ -43,6 +45,21 @@ namespace WindowsFormsApp2.Views
             }
            
             
+        }
+
+        private void CaiDatQuyen()
+        {
+            using (var context = new QL_BanHangEntities())
+            {
+                 //if (DanhSachQuyen.Contains("user"))
+                 {
+                    btnXoa.Enabled = true;
+                    btnLuu.Enabled = true;
+                    btnMoFile.Enabled = true;
+                 }
+            }
+               
+           
         }
 
         private void FillDiscount(List<Discount> discounts)
@@ -73,6 +90,7 @@ namespace WindowsFormsApp2.Views
                 dgvListSanPham.DataSource = _studentList;
             }
         }
+      
         private void SettingForm()
         {
             dgvListSanPham.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -180,7 +198,7 @@ namespace WindowsFormsApp2.Views
 
         private void btnThoat_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            this.Close();
         }
 
         private void btnXoa_Click(object sender, EventArgs e)
