@@ -54,6 +54,8 @@
             this.txtMoTa = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnTim = new System.Windows.Forms.Button();
+            this.txtTimKiem = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbPhoto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListSanPham)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -82,7 +84,7 @@
             // 
             // btnMoFile
             // 
-            this.btnMoFile.Location = new System.Drawing.Point(544, 219);
+            this.btnMoFile.Location = new System.Drawing.Point(522, 219);
             this.btnMoFile.Name = "btnMoFile";
             this.btnMoFile.Size = new System.Drawing.Size(87, 23);
             this.btnMoFile.TabIndex = 5;
@@ -92,7 +94,7 @@
             // 
             // btnLuu
             // 
-            this.btnLuu.Location = new System.Drawing.Point(439, 261);
+            this.btnLuu.Location = new System.Drawing.Point(395, 271);
             this.btnLuu.Name = "btnLuu";
             this.btnLuu.Size = new System.Drawing.Size(87, 23);
             this.btnLuu.TabIndex = 6;
@@ -102,7 +104,7 @@
             // 
             // btnXoa
             // 
-            this.btnXoa.Location = new System.Drawing.Point(544, 261);
+            this.btnXoa.Location = new System.Drawing.Point(522, 271);
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(87, 23);
             this.btnXoa.TabIndex = 7;
@@ -112,7 +114,7 @@
             // 
             // btnThoat
             // 
-            this.btnThoat.Location = new System.Drawing.Point(653, 261);
+            this.btnThoat.Location = new System.Drawing.Point(643, 271);
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.Size = new System.Drawing.Size(87, 23);
             this.btnThoat.TabIndex = 8;
@@ -122,9 +124,9 @@
             // 
             // pbPhoto
             // 
-            this.pbPhoto.Location = new System.Drawing.Point(473, 19);
+            this.pbPhoto.Location = new System.Drawing.Point(431, 58);
             this.pbPhoto.Name = "pbPhoto";
-            this.pbPhoto.Size = new System.Drawing.Size(221, 179);
+            this.pbPhoto.Size = new System.Drawing.Size(248, 147);
             this.pbPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbPhoto.TabIndex = 9;
             this.pbPhoto.TabStop = false;
@@ -158,7 +160,9 @@
             // 
             // dgvListSanPham
             // 
-            this.dgvListSanPham.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvListSanPham.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvListSanPham.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvListSanPham.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvListSanPham.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -273,6 +277,10 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.txtTimKiem);
+            this.groupBox1.Controls.Add(this.btnTim);
             this.groupBox1.Controls.Add(this.dtpNgay);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.btnThoat);
@@ -302,6 +310,22 @@
             this.groupBox1.TabIndex = 28;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin sản phẩm";
+            // 
+            // btnTim
+            // 
+            this.btnTim.Location = new System.Drawing.Point(615, 17);
+            this.btnTim.Name = "btnTim";
+            this.btnTim.Size = new System.Drawing.Size(87, 23);
+            this.btnTim.TabIndex = 28;
+            this.btnTim.Text = "Tìm";
+            this.btnTim.UseVisualStyleBackColor = true;
+            // 
+            // txtTimKiem
+            // 
+            this.txtTimKiem.Location = new System.Drawing.Point(431, 19);
+            this.txtTimKiem.Name = "txtTimKiem";
+            this.txtTimKiem.Size = new System.Drawing.Size(178, 20);
+            this.txtTimKiem.TabIndex = 29;
             // 
             // FormQL_SanPham
             // 
@@ -350,5 +374,7 @@
         private System.Windows.Forms.TextBox txtMoTa;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.TextBox txtTimKiem;
+        private System.Windows.Forms.Button btnTim;
     }
 }

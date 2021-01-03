@@ -277,8 +277,8 @@
             this.tsmDatHang.Checked = true;
             this.tsmDatHang.CheckState = System.Windows.Forms.CheckState.Checked;
             this.tsmDatHang.Name = "tsmDatHang";
-            this.tsmDatHang.Size = new System.Drawing.Size(69, 20);
-            this.tsmDatHang.Text = "Đặt Hàng";
+            this.tsmDatHang.Size = new System.Drawing.Size(80, 20);
+            this.tsmDatHang.Text = "Thanh Toán";
             this.tsmDatHang.Click += new System.EventHandler(this.tsmTrangChu_Click);
             // 
             // tsmDanhMucQuanLy

@@ -144,15 +144,9 @@ namespace WindowsFormsApp2.Views
             {
                 using (QL_BanHangEntities context = new QL_BanHangEntities())
                 {
-                    
                     MemoryStream stream = new MemoryStream();         
                     pbPhoto.Image.Save(stream, ImageFormat.Jpeg);
-                
-                
-                   
-
-                    Product productId = context.Products.FirstOrDefault(p => p.id.ToString() == txtId.Text);
-                
+                    Product productId = context.Products.FirstOrDefault(p => p.id.ToString() == txtId.Text);            
                 if (productId != null)
                     {
                         productId.Name = txtTen.Text;
@@ -168,8 +162,8 @@ namespace WindowsFormsApp2.Views
                         if (dialogResult == DialogResult.Yes)
                         {
                             context.SaveChanges();
-                        }
-                        MessageBox.Show("Sửa thành công");
+                            MessageBox.Show("Sửa thành công");
+                        }                 
                     }
                     else
                     {
@@ -203,21 +197,31 @@ namespace WindowsFormsApp2.Views
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            using (var context = new QL_BanHangEntities())
+            try
             {
-                Product productId = context.Products.FirstOrDefault(p => p.id.ToString() == txtId.Text);
-                        if (productId != null)
-                        {
-                            context.Products.Remove(productId);
-                            context.SaveChanges();
-                            MessageBox.Show("Xóa thành công");
-                        }
-                        else
-                        {
-                            MessageBox.Show("Xóa Thất Bại");
-                        }
-                      Display();  
+                using (var context = new QL_BanHangEntities())
+                {
+                    Product productId = context.Products.Where(p => p.id.ToString() == txtId.Text).FirstOrDefault();
+                    if (productId != null)
+                    {
+                        context.Products.Remove(productId);
+                        context.SaveChanges();
+                        MessageBox.Show("Xóa thành công");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Xóa Thất Bại");
+                    }
+                    Display();
+                }
             }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
+           
                  
                 
             
