@@ -111,7 +111,6 @@ namespace WindowsFormsApp2.Views
             {
                 using (var context = new QL_BanHangEntities())
                 {
-                    txtTongTien.Text = "0";
                     if (string.IsNullOrEmpty(txtMaHoaDon1.Text))
                         {
                             MessageBox.Show("Vui lòng tạo hóa đơn");
@@ -168,13 +167,20 @@ namespace WindowsFormsApp2.Views
 
         private void btnThanhToan_Click(object sender, EventArgs e)
         {
+            using(var context = new QL_BanHangEntities())
+            {             
+                context.Orders.Where(x => x.Id.ToString() == txtMaHoaDon1.Text).FirstOrDefault().Amount = Convert.ToDecimal(txtTongTien.Text);
+                context.Orders.Where(x => x.Id.ToString() == txtMaHoaDon1.Text).FirstOrDefault().Address = txtDiaChi.Text;
+                context.SaveChanges();
+            }
             clear();
             MessageBox.Show("Thanh Toán Thành Công ");
+           
         }
         private void clear()
         {
             dgvDatHang.Rows.Clear();
-            txtMaHoaDon1.Text = txtNgayTao.Text = txtTongTien.Text = txtId.Text = " ";
+            txtDiaChi.Text = txtMaHoaDon1.Text = txtNgayTao.Text = txtTongTien.Text = txtId.Text = " ";
         }
     }
 }
