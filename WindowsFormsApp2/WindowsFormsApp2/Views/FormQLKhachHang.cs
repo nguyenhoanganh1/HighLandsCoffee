@@ -29,6 +29,7 @@ namespace WindowsFormsApp2
         }
         public void Display()   // Display Method is a common method to bind the Student details in datagridview after save,update and delete operation perform.
         {
+            SettingForm();
             using (QL_BanHangEntities _entity = new QL_BanHangEntities())
             {
                 List<CustomerDTO> _customerList = new List<CustomerDTO>();
@@ -41,6 +42,11 @@ namespace WindowsFormsApp2
                 }).ToList();
                 dataGridView1.DataSource = _customerList;
             }
+        }
+
+        private void SettingForm()
+        {
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -91,7 +97,6 @@ namespace WindowsFormsApp2
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-         
                 using (QL_BanHangEntities _entity = new QL_BanHangEntities())
                 {
                   
@@ -116,13 +121,8 @@ namespace WindowsFormsApp2
                     Display();
                     Clear();
                 }
-            
-           
-
         }
-#pragma warning disable CS0246 // The type or namespace name 'Customer' could not be found (are you missing a using directive or an assembly reference?)
         private Customer GetCustomer()
-#pragma warning restore CS0246 // The type or namespace name 'Customer' could not be found (are you missing a using directive or an assembly reference?)
         {
             Customer cus = new Customer();
                 cus.Id = Convert.ToInt32(txtId.Text);
@@ -134,13 +134,21 @@ namespace WindowsFormsApp2
 
         private void dataGridView1_CellClick_1(object sender, DataGridViewCellEventArgs e)
         {
-            if (dataGridView1.Rows.Count > 0)
+            try
             {
-                txtId.Text = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
-                txtName.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-                txtAddress.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-                txtPhoneNumber.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
+                if (dataGridView1.Rows.Count > 0)
+                {
+                    txtId.Text = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
+                    txtName.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+                    txtAddress.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
+                    txtPhoneNumber.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+          
            
         }
 

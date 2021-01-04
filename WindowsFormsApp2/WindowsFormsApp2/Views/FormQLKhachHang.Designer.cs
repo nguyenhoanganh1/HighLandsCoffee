@@ -134,7 +134,6 @@
             this.txtId.AcceptsTab = true;
             this.txtId.Location = new System.Drawing.Point(435, 58);
             this.txtId.Name = "txtId";
-            this.txtId.ReadOnly = true;
             this.txtId.Size = new System.Drawing.Size(243, 20);
             this.txtId.TabIndex = 8;
             // 
@@ -184,7 +183,7 @@
             this.label4.TabIndex = 13;
             this.label4.Text = "Quản Lý Khách Hàng";
             // 
-            // Form1
+            // FormQLKhachHang
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -203,7 +202,7 @@
             this.Controls.Add(this.txtPhoneNumber);
             this.Controls.Add(this.txtAddress);
             this.Controls.Add(this.txtName);
-            this.Name = "Form1";
+            this.Name = "FormQLKhachHang";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
