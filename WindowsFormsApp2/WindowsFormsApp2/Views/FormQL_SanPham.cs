@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Exchange.WebServices.Data;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
@@ -12,9 +13,10 @@ namespace WindowsFormsApp2.Views
 {
     public partial class FormQL_SanPham : Form
     {
-        
+        QL_BanHangEntities context = new QL_BanHangEntities();
         private Image image;
-     
+      
+        public static int userId {get; set;}
         public FormQL_SanPham()
         {
             InitializeComponent();
@@ -23,7 +25,7 @@ namespace WindowsFormsApp2.Views
         {
            try
             {
-                 CaiDatQuyen();
+                CaiDatQuyen();
                 SettingForm();
                 using(var context = new QL_BanHangEntities())
                 {                   
@@ -219,12 +221,7 @@ namespace WindowsFormsApp2.Views
             {
 
                 throw;
-            }
-            
-           
-                 
-                
-            
+            }       
         }
 
         private void dgvListSanPham_CellClick(object sender, DataGridViewCellEventArgs e)

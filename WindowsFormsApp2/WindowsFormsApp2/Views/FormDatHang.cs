@@ -116,8 +116,7 @@ namespace WindowsFormsApp2.Views
                             MessageBox.Show("Vui lòng tạo hóa đơn");
                         }
                     else
-                    {
-                        
+                    {                      
                         string id = dgvDanhSachSanPham.SelectedRows[0].Cells[0].Value.ToString();
                         string name = dgvDanhSachSanPham.SelectedRows[0].Cells[1].Value.ToString();
                         int soluong = 1;
@@ -139,8 +138,8 @@ namespace WindowsFormsApp2.Views
                         {
                             id, name, soluong.ToString(), gia.ToString(), mota,loai,nhaCungCap,maGiamGia
                         };
-                        dgvDatHang.Rows.Add(row);
-                        ProductDetail productDetail = new ProductDetail();
+                        ProductDetail productDetail = new ProductDetail();                                                              
+                        dgvDatHang.Rows.Add(row);                    
                         productDetail.OrderId = Convert.ToInt32( txtMaHoaDon1.Text);
                         productDetail.ProductId = Convert.ToInt32(txtId.Text);
                         productDetail.Quantity = soluong;
@@ -148,10 +147,7 @@ namespace WindowsFormsApp2.Views
                         context.ProductDetails.Add(productDetail);
                         context.SaveChanges();
                         // Nếu như Id Order và Id Sản phẩm = id order va id sản phẩm thì tính tiền
-
                         txtTongTien.Text = context.ProductDetails.Where(x => x.OrderId == productDetail.OrderId).Sum(x => x.Quantity * x.UnitPrice).Value.ToString();
-
-
                     }
                 }
             }
@@ -167,20 +163,49 @@ namespace WindowsFormsApp2.Views
 
         private void btnThanhToan_Click(object sender, EventArgs e)
         {
-            using(var context = new QL_BanHangEntities())
-            {             
-                context.Orders.Where(x => x.Id.ToString() == txtMaHoaDon1.Text).FirstOrDefault().Amount = Convert.ToDecimal(txtTongTien.Text);
-                context.Orders.Where(x => x.Id.ToString() == txtMaHoaDon1.Text).FirstOrDefault().Address = txtDiaChi.Text;
-                context.SaveChanges();
+            if (string.IsNullOrEmpty(txtMaHoaDon1.Text))
+            {
+                MessageBox.Show("Vui lòng tạo hóa đơn");
             }
-            clear();
-            MessageBox.Show("Thanh Toán Thành Công ");
-           
+            else
+            {
+                using (var context = new QL_BanHangEntities())
+                {             
+                    context.Orders.Where(x => x.Id.ToString() == txtMaHoaDon1.Text).FirstOrDefault().Amount = Convert.ToDecimal(txtTongTien.Text);
+                    context.Orders.Where(x => x.Id.ToString() == txtMaHoaDon1.Text).FirstOrDefault().Address = txtDiaChi.Text;
+                    context.SaveChanges();
+                }
+                clear();
+                MessageBox.Show("Thanh Toán Thành Công ");
+            }  
         }
         private void clear()
         {
             dgvDatHang.Rows.Clear();
             txtDiaChi.Text = txtMaHoaDon1.Text = txtNgayTao.Text = txtTongTien.Text = txtId.Text = " ";
         }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            using (var context = new QL_BanHangEntities())
+            {
+                string search = txtTimKiem.Text;
+                List<ProductDTO2> _studentList = new List<ProductDTO2>();
+                _studentList = context.Products.Select(x => new ProductDTO2
+                {
+                    id = x.id,
+                    name = x.Name,
+                    quantity = x.Quantity.Value,
+                    productDate = x.ProductDate.Value,
+                    UnitPrice = (decimal)x.UnitPrice.Value,
+                    description = x.Description,
+                    images = x.Images,
+                    categoryId = x.CategoryProduct.Name,
+                    supplierId = x.Supplier.Name,
+                    DiscountName = x.Discount.Name
+                }).Where(x=>x.name.Contains(search) ||x.supplierId.Contains(search)).ToList();
+                dgvDanhSachSanPham.DataSource = _studentList;
+            }            
+        }       
     }
 }
