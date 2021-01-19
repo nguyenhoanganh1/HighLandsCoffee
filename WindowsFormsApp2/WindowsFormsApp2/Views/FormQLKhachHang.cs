@@ -17,10 +17,11 @@ namespace WindowsFormsApp2
 {
     public partial class FormQLKhachHang : Form
     {
+        Model1 context = new Model1();
         public FormQLKhachHang()
         {
             InitializeComponent();
-           
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -30,18 +31,17 @@ namespace WindowsFormsApp2
         public void Display()   // Display Method is a common method to bind the Student details in datagridview after save,update and delete operation perform.
         {
             SettingForm();
-            using (QL_BanHangEntities _entity = new QL_BanHangEntities())
+
+            List<CustomerDTO> _customerList = new List<CustomerDTO>();
+            _customerList = context.Customers.Select(x => new CustomerDTO
             {
-                List<CustomerDTO> _customerList = new List<CustomerDTO>();
-                _customerList = _entity.Customers.Select(x => new CustomerDTO
-                {
-                    Id = x.Id,
-                    Name = x.Name,
-                    Email = x.Email,
-                   PhoneNumber = x.Phone
-                }).ToList();
-                dataGridView1.DataSource = _customerList;
-            }
+                Id = x.Id,
+                Name = x.Name,
+                Email = x.Email,
+                PhoneNumber = x.Phone
+            }).ToList();
+            dataGridView1.DataSource = _customerList;
+
         }
 
         private void SettingForm()
@@ -51,38 +51,36 @@ namespace WindowsFormsApp2
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            using (QL_BanHangEntities _entity = new QL_BanHangEntities())
+
+            if (txtName.Text != "" && txtAddress.Text != "" && txtPhoneNumber.Text != "")
             {
-                if (txtName.Text != "" && txtAddress.Text != "" && txtPhoneNumber.Text != "")
-                {                 
-                    Customer cus = new Customer();                   
-                    cus.Name = txtName.Text;                  
-                    cus.Email = txtAddress.Text;
-                    cus.Phone =  txtPhoneNumber.Text;               
-                    SaveStudentDetails(cus);                     
-                    Display();
-                    Clear();                     
-                    MessageBox.Show("Thêm Thành Công");    
-                }   
-                else
-                    {
-                        MessageBox.Show("Vui lòng nhập đầy đủ thông tin");
-                    }
+                Customer cus = new Customer();
+                cus.Name = txtName.Text;
+                cus.Email = txtAddress.Text;
+                cus.Phone = txtPhoneNumber.Text;
+                SaveStudentDetails(cus);
+                Display();
+                Clear();
+                MessageBox.Show("Thêm Thành Công");
             }
+            else
+            {
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin");
+            }
+
 
         }
         // THƯ VIỆN HÓA
 #pragma warning disable CS0246 // The type or namespace name 'Customer' could not be found (are you missing a using directive or an assembly reference?)
-        public bool SaveStudentDetails(Customer cus)   
+        public bool SaveStudentDetails(Customer cus)
 #pragma warning restore CS0246 // The type or namespace name 'Customer' could not be found (are you missing a using directive or an assembly reference?)
         {
             bool result = false;
-            using (QL_BanHangEntities _entity = new QL_BanHangEntities())
-            {
-                _entity.Customers.Add(cus);
-                _entity.SaveChanges();
-                result = true;
-            }
+
+            context.Customers.Add(cus);
+            context.SaveChanges();
+            result = true;
+
             return result;
         }
         public void Clear()
@@ -93,43 +91,42 @@ namespace WindowsFormsApp2
         {
             Application.Exit();
         }
-     
+
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-                using (QL_BanHangEntities _entity = new QL_BanHangEntities())
+
+
+            if (txtName.Text == "" && txtAddress.Text == "" && txtPhoneNumber.Text == "")
+            {
+                MessageBox.Show("Vui lòng chọn dòng muốn sửa");
+            }
+            else
+            {
+                Customer cus = GetCustomer();
+                if (cus.Id == null)
                 {
-                  
-                    if (txtName.Text == "" && txtAddress.Text == "" && txtPhoneNumber.Text == "")
-                    {
-                        MessageBox.Show("Vui lòng chọn dòng muốn sửa");
-                    }
-                    else
-                    {
-                        Customer cus = GetCustomer();
-                        if (cus.Id == null)
-                        {
-                             cus.Id = Convert.ToInt32(txtId.Text);
-                             _entity.Customers.Add(cus);
-                         }
-                        else
-                        {
-                             _entity.Entry(cus).State = EntityState.Modified;
-                             _entity.SaveChanges();
-                        }
-                    }    
-                    Display();
-                    Clear();
+                    cus.Id = Convert.ToInt32(txtId.Text);
+                    context.Customers.Add(cus);
                 }
+                else
+                {
+                    context.Entry(cus).State = EntityState.Modified;
+                    context.SaveChanges();
+                }
+            }
+            Display();
+            Clear();
+
         }
         private Customer GetCustomer()
         {
             Customer cus = new Customer();
-                cus.Id = Convert.ToInt32(txtId.Text);
-                cus.Name = txtName.Text;
-                cus.Email = txtAddress.Text;
-                cus.Phone = txtPhoneNumber.Text;
-                return cus;
+            cus.Id = Convert.ToInt32(txtId.Text);
+            cus.Name = txtName.Text;
+            cus.Email = txtAddress.Text;
+            cus.Phone = txtPhoneNumber.Text;
+            return cus;
         }
 
         private void dataGridView1_CellClick_1(object sender, DataGridViewCellEventArgs e)
@@ -148,36 +145,35 @@ namespace WindowsFormsApp2
             {
                 MessageBox.Show(ex.Message);
             }
-          
-           
+
+
         }
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            using (QL_BanHangEntities _entity = new QL_BanHangEntities())
-            {
-                if (txtName.Text == "" && txtAddress.Text == "" && txtPhoneNumber.Text == "")
-                {
-                    MessageBox.Show("Vui lòng chọn dòng muốn xóa");
-                }
-                else
-                {
-                    int id = Convert.ToInt32(txtId.Text);
-                    Customer cus = _entity.Customers.Find(id);
-                    DialogResult dr = MessageBox.Show("Xác nhận xóa?", "Bạn Có muốn xóa không?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (dr == DialogResult.Yes)
-                    {
-                        _entity.Customers.Remove(cus);
-                        _entity.SaveChanges();
-                    }
-                } 
-                Display();
-                Clear();
 
+            if (txtName.Text == "" && txtAddress.Text == "" && txtPhoneNumber.Text == "")
+            {
+                MessageBox.Show("Vui lòng chọn dòng muốn xóa");
             }
-           
+            else
+            {
+                int id = Convert.ToInt32(txtId.Text);
+                Customer cus = context.Customers.Find(id);
+                DialogResult dr = MessageBox.Show("Xác nhận xóa?", "Bạn Có muốn xóa không?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dr == DialogResult.Yes)
+                {
+                    context.Customers.Remove(cus);
+                    context.SaveChanges();
+                }
+            }
+            Display();
+            Clear();
+
+
+
         }
 
-       
+
     }
 }
