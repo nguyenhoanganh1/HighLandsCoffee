@@ -13,31 +13,30 @@ namespace WindowsFormsApp2.Views
 {
     public partial class FormQL_SanPham : Form
     {
-        QL_BanHangEntities context = new QL_BanHangEntities();
+        Model1 context = new Model1();
         private Image image;
-      
-        public static int userId {get; set;}
+
+        public static int userId { get; set; }
         public FormQL_SanPham()
         {
             InitializeComponent();
         }
         private void FormQL_SanPham_Load(object sender, EventArgs e)
         {
-           try
+            try
             {
                 CaiDatQuyen();
                 SettingForm();
-                using(var context = new QL_BanHangEntities())
-                {                   
-                    List<CategoryProduct> categoryProducts = context.CategoryProducts.ToList();
-                    List<Supplier> suppliers = context.Suppliers.ToList();
-                    List<Discount> discounts = context.Discounts.ToList();
-                    FillDiscount(discounts);
-                    FillCategory(categoryProducts);
-                    FillSupplier(suppliers);
-                    
-                }
-               
+
+                List<CategoryProduct> categoryProducts = context.CategoryProducts.ToList();
+                List<Supplier> suppliers = context.Suppliers.ToList();
+                List<Discount> discounts = context.Discounts.ToList();
+                FillDiscount(discounts);
+                FillCategory(categoryProducts);
+                FillSupplier(suppliers);
+
+
+
                 Display();
             }
             catch (Exception ex)
@@ -45,23 +44,22 @@ namespace WindowsFormsApp2.Views
 
                 MessageBox.Show(ex.Message);
             }
-           
-            
+
+
         }
 
         private void CaiDatQuyen()
         {
-            using (var context = new QL_BanHangEntities())
-            {
-                 //if (DanhSachQuyen.Contains("user"))
-                 {
-                    btnXoa.Enabled = true;
-                    btnLuu.Enabled = true;
-                    btnMoFile.Enabled = true;
-                 }
-            }
-               
-           
+
+
+
+            btnXoa.Enabled = true;
+            btnLuu.Enabled = true;
+            btnMoFile.Enabled = true;
+
+
+
+
         }
 
         private void FillDiscount(List<Discount> discounts)
@@ -71,28 +69,27 @@ namespace WindowsFormsApp2.Views
             this.cbGiamGia.DisplayMember = "Name";
         }
 
-        public void Display()   
+        public void Display()
         {
-            using (var _entity = new QL_BanHangEntities())
+
+            List<ProductDTO2> _studentList = new List<ProductDTO2>();
+            _studentList = context.Products.Select(x => new ProductDTO2
             {
-                List<ProductDTO2> _studentList = new List<ProductDTO2>();
-                _studentList = _entity.Products.Select(x => new ProductDTO2
-                {
-                    id = x.id,
-                    name = x.Name,
-                    quantity = x.Quantity.Value,
-                    productDate = x.ProductDate.Value,
-                    UnitPrice = (decimal) x.UnitPrice.Value,
-                    description = x.Description,
-                    images = x.Images,
-                    categoryId = x.CategoryProduct.Name,
-                    supplierId = x.Supplier.Name,
-                    DiscountName = x.Discount.Name
-                }).ToList();
-                dgvListSanPham.DataSource = _studentList;
-            }
+                id = x.id,
+                name = x.Name,
+                quantity = x.Quantity.Value,
+                productDate = x.ProductDate.Value,
+                UnitPrice = x.UnitPrice.Value,
+                description = x.Description,
+                images = x.Images,
+                categoryId = x.CategoryProduct.Name,
+                supplierId = x.Supplier.Name,
+                DiscountName = x.Discount.Name
+            }).ToList();
+            dgvListSanPham.DataSource = _studentList;
+
         }
-      
+
         private void SettingForm()
         {
             dgvListSanPham.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -111,7 +108,7 @@ namespace WindowsFormsApp2.Views
             this.cbLoai.ValueMember = "Id";
             this.cbLoai.DisplayMember = "Name";
         }
- 
+
 
         private void btnMoFile_Click(object sender, EventArgs e)
         {
@@ -135,61 +132,60 @@ namespace WindowsFormsApp2.Views
 
                 MessageBox.Show(ex.Message);
             }
-                
-            
+
+
         }
-       
+
 
         private void btnLuu_Click(object sender, EventArgs e)
         {
             try
             {
-                using (QL_BanHangEntities context = new QL_BanHangEntities())
-                {
-                    MemoryStream stream = new MemoryStream();         
-                    pbPhoto.Image.Save(stream, ImageFormat.Jpeg);
-                    Product productId = context.Products.FirstOrDefault(p => p.id.ToString() == txtId.Text);            
+
+                MemoryStream stream = new MemoryStream();
+                pbPhoto.Image.Save(stream, ImageFormat.Jpeg);
+                Product productId = context.Products.FirstOrDefault(p => p.id.ToString() == txtId.Text);
                 if (productId != null)
+                {
+                    productId.Name = txtTen.Text;
+                    productId.Quantity = Convert.ToInt32(txtSoLuong.Text);
+                    productId.ProductDate = Convert.ToDateTime(dtpNgay.Text);
+                    productId.UnitPrice = Convert.ToDouble(txtGia.Text);
+                    productId.Description = txtMoTa.Text;
+                    productId.Images = stream.ToArray();
+                    productId.SupplierId = Convert.ToInt32(cbNhaCungCap.SelectedValue.ToString());
+                    productId.CategoryId = Convert.ToInt32(cbLoai.SelectedValue.ToString());
+                    productId.DiscountId = Convert.ToInt32(cbGiamGia.SelectedValue.ToString());
+                    DialogResult dialogResult = MessageBox.Show("Bạn có muốn sửa không?", "Nhấn Yes Để Sửa", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
                     {
-                        productId.Name = txtTen.Text;
-                        productId.Quantity = Convert.ToInt32(txtSoLuong.Text);
-                        productId.ProductDate = Convert.ToDateTime(dtpNgay.Text);
-                        productId.UnitPrice = Convert.ToDecimal(txtGia.Text);
-                        productId.Description = txtMoTa.Text;
-                        productId.Images = stream.ToArray();
-                        productId.SupplierId = Convert.ToInt32(cbNhaCungCap.SelectedValue.ToString());
-                        productId.CategoryId = Convert.ToInt32(cbLoai.SelectedValue.ToString());
-                        productId.DiscountId = Convert.ToInt32(cbGiamGia.SelectedValue.ToString());
-                        DialogResult dialogResult = MessageBox.Show("Bạn có muốn sửa không?", "Nhấn Yes Để Sửa", MessageBoxButtons.YesNo);
-                        if (dialogResult == DialogResult.Yes)
-                        {
-                            context.SaveChanges();
-                            MessageBox.Show("Sửa thành công");
-                        }                 
-                    }
-                    else
-                    {
-                        Product product = new Product();
-                        product.Name = txtTen.Text;
-                        product.Quantity = Convert.ToInt32(txtSoLuong.Text);
-                        product.ProductDate = Convert.ToDateTime(dtpNgay.Text);
-                        product.UnitPrice = Convert.ToDecimal(txtGia.Text);
-                        product.Description = txtMoTa.Text;
-                        product.Images = stream.ToArray();
-                        product.SupplierId = Convert.ToInt32(cbNhaCungCap.SelectedValue.ToString());
-                        product.CategoryId = Convert.ToInt32(cbLoai.SelectedValue.ToString());
-                        product.DiscountId = Convert.ToInt32(cbGiamGia.SelectedValue.ToString());
-                        context.Products.Add(product);
                         context.SaveChanges();
-                        MessageBox.Show("Thêm sản phẩm thành công");
-                    }      
+                        MessageBox.Show("Sửa thành công");
+                    }
                 }
+                else
+                {
+                    Product product = new Product();
+                    product.Name = txtTen.Text;
+                    product.Quantity = Convert.ToInt32(txtSoLuong.Text);
+                    product.ProductDate = Convert.ToDateTime(dtpNgay.Text);
+                    product.UnitPrice = Convert.ToDouble(txtGia.Text);
+                    product.Description = txtMoTa.Text;
+                    product.Images = stream.ToArray();
+                    product.SupplierId = Convert.ToInt32(cbNhaCungCap.SelectedValue.ToString());
+                    product.CategoryId = Convert.ToInt32(cbLoai.SelectedValue.ToString());
+                    product.DiscountId = Convert.ToInt32(cbGiamGia.SelectedValue.ToString());
+                    context.Products.Add(product);
+                    context.SaveChanges();
+                    MessageBox.Show("Thêm sản phẩm thành công");
+                }
+
                 Display();
             }
             catch (Exception ex)
-            { 
+            {
                 MessageBox.Show(ex.Message);
-            }          
+            }
         }
 
         private void btnThoat_Click(object sender, EventArgs e)
@@ -201,27 +197,25 @@ namespace WindowsFormsApp2.Views
         {
             try
             {
-                using (var context = new QL_BanHangEntities())
+                Product productId = context.Products.Where(p => p.id.ToString() == txtId.Text).FirstOrDefault();
+                if (productId != null)
                 {
-                    Product productId = context.Products.Where(p => p.id.ToString() == txtId.Text).FirstOrDefault();
-                    if (productId != null)
-                    {
-                        context.Products.Remove(productId);
-                        context.SaveChanges();
-                        MessageBox.Show("Xóa thành công");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Xóa Thất Bại");
-                    }
-                    Display();
+                    context.Products.Remove(productId);
+                    context.SaveChanges();
+                    MessageBox.Show("Xóa thành công");
                 }
+                else
+                {
+                    MessageBox.Show("Xóa Thất Bại");
+                }
+                Display();
+
             }
             catch (Exception)
             {
 
                 throw;
-            }       
+            }
         }
 
         private void dgvListSanPham_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -237,7 +231,7 @@ namespace WindowsFormsApp2.Views
                     txtGia.Text = dgvListSanPham.SelectedRows[0].Cells[4].Value.ToString();
                     txtMoTa.Text = dgvListSanPham.SelectedRows[0].Cells[5].Value.ToString();
                     // hinh anh
-                    var context = new QL_BanHangEntities();
+
                     Product product = context.Products.FirstOrDefault(p => p.id.ToString() == txtId.Text);
                     MemoryStream stream = new MemoryStream(product.Images.ToArray());
                     Image img = Image.FromStream(stream);
@@ -251,8 +245,8 @@ namespace WindowsFormsApp2.Views
             {
 
                 MessageBox.Show(ex.Message);
-            } 
-            
+            }
+
         }
     }
 }
