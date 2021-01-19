@@ -16,7 +16,7 @@ namespace WindowsFormsApp2.Views
     {
         public event ChungThucTaiKhoan chungThucTaiKhoan;
         public delegate void ChungThucTaiKhoan(object sender);
-        Model1 context = new Model1();
+
         public FormDangNhap()
         {
             InitializeComponent();
@@ -26,23 +26,24 @@ namespace WindowsFormsApp2.Views
         {
             if (KiemTraInput())
             {
-
-                string userName = txtUserName.Text;
-                string password = MD5Hash(txtPassword.Text);
-                Employee employee = context.Employees.Where(x => x.UserName == userName && x.Password == password).FirstOrDefault();
-
-                if (employee != null)
-                {
-                    chungThucTaiKhoan(employee);
-                    this.Close();
-                }
-                else
-                {
-                    MessageBox.Show("Vui lòng nhập đúng thông tin");
-                    return;
-                }
-
-
+                using (var context = new QL_BanHangEntities())
+                {                  
+                    string userName = txtUserName.Text;
+                    string password = MD5Hash(txtPassword.Text);
+                    Employee employee = context.Employees.Where(x => x.UserName == userName && x.Password == password).FirstOrDefault();
+                    
+                       if (employee != null)
+                        {
+                            chungThucTaiKhoan(employee);
+                            this.Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Vui lòng nhập đúng thông tin");
+                            return;
+                        } 
+                        
+                } 
             }
         }
 
