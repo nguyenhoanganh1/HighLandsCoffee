@@ -146,11 +146,59 @@ namespace WindowsFormsApp2.Views
                     context.ProductDetails.Add(productDetail);
                     context.SaveChanges();
                     // Nếu như Id Order và Id Sản phẩm = id order va id sản phẩm thì tính tiền
-                    txtTongTien.Text = context.ProductDetails.Where(x => x.OrderId == productDetail.OrderId).Sum(x => (x.Quantity * x.UnitPrice) - ((x.Quantity * x.UnitPrice) * (x.Product.Discount.Discount1 * 0.01))).Value.ToString();
+                    //txtTongTien.Text = context.ProductDetails.Where(x => x.OrderId == productDetail.OrderId).Sum(x => (x.Quantity * x.UnitPrice) - ((x.Quantity * x.UnitPrice) * (x.Product.Discount.Discount1 * 0.01))).Value.ToString();
 
+                    Product product = context.Products.Where(x => x.id.ToString() == txtId.Text).FirstOrDefault();
+
+                    if (product.Discount.Discount1.Equals(5))
+                    {
+                        double g = context.ProductDetails.Where(x => x.OrderId == productDetail.OrderId).Sum(x => (x.Quantity * x.UnitPrice) * 0.05).Value;
+                        txtTongTien.Text = context.ProductDetails.Where(x => x.OrderId == productDetail.OrderId).Sum(x => (x.Quantity * x.UnitPrice) - g).Value.ToString();
+                        Product p = context.Products.Where(x => x.id.ToString() == txtId.Text).FirstOrDefault();
+                        if (p != null)
+                        {
+                            p.Quantity -= soluong;
+                            context.SaveChanges();
+                        }
+
+                    }
+                    else if (product.Discount.Discount1.Equals(10))
+                    {
+                        double g = context.ProductDetails.Where(x => x.OrderId == productDetail.OrderId).Sum(x => (x.Quantity * x.UnitPrice) * 0.10).Value;
+                        txtTongTien.Text = context.ProductDetails.Where(x => x.OrderId == productDetail.OrderId).Sum(x => (x.Quantity * x.UnitPrice) - g).Value.ToString();
+                        Product p = context.Products.Where(x => x.id.ToString() == txtId.Text).FirstOrDefault();
+                        if (p != null)
+                        {
+                            p.Quantity -= soluong;
+                            context.SaveChanges();
+                        }
+                    }
+                    else if (product.Discount.Discount1.Equals(15))
+                    {
+                        double g = context.ProductDetails.Where(x => x.OrderId == productDetail.OrderId).Sum(x => (x.Quantity * x.UnitPrice) * 0.15).Value;
+                        txtTongTien.Text = context.ProductDetails.Where(x => x.OrderId == productDetail.OrderId).Sum(x => (x.Quantity * x.UnitPrice) - g).Value.ToString();
+                        Product p = context.Products.Where(x => x.id.ToString() == txtId.Text).FirstOrDefault();
+                        if (p != null)
+                            if (string.IsNullOrEmpty(txtMaHoaDon1.Text))
+                            {
+                                p.Quantity -= soluong;
+                                context.SaveChanges();
+                                MessageBox.Show("Vui lòng tạo hóa đơn");
+                            }
+                    }
+                    else if (product.Discount.Discount1.Equals(20))
+                    {
+                        double g = context.ProductDetails.Where(x => x.OrderId == productDetail.OrderId).Sum(x => (x.Quantity * x.UnitPrice) * 0.20).Value;
+                        txtTongTien.Text = context.ProductDetails.Where(x => x.OrderId == productDetail.OrderId).Sum(x => (x.Quantity * x.UnitPrice) - g).Value.ToString();
+                        Product p = context.Products.Where(x => x.id.ToString() == txtId.Text).FirstOrDefault();
+
+
+                    }
                 }
-
+                Display();
             }
+
+
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
