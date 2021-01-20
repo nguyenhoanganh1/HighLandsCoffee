@@ -14,6 +14,7 @@ namespace WindowsFormsApp2
 {
     public partial class FormTrangChu : Form
     {
+        //public static int maNhanVien;
         private string tendangnhap;
         List<string> DanhSachQuyen;
         public FormTrangChu()
@@ -33,10 +34,14 @@ namespace WindowsFormsApp2
             KhoaChucNangHeThong(false);
             HienThiFormDangNhap(name);
         }
-       
+        private void MoKhoaChucNangHeThong(bool islock)
+        {
+            tsmQuenMatKhau.Enabled = islock;
+        }
         private void KhoaChucNangHeThong(bool islock)
         {
             // Cài đặt trạng thai
+            tsmQuenMatKhau.Enabled = !islock;
             tsmTaoTaiKhoan.Enabled = islock;
             tsmDanhMucQuanLy.Enabled = islock;
             tsmDangXuat.Enabled = islock;
@@ -47,8 +52,10 @@ namespace WindowsFormsApp2
         private bool HienThiForm(string nameForm)
         {
             Form form = this.MdiChildren.Where(f => f.Name == nameForm).FirstOrDefault();
-            if(form != null)
+            
+            if (form != null)
             {
+                
                 form.Activate();
                 return true;
             }
@@ -57,15 +64,12 @@ namespace WindowsFormsApp2
 
         private void HienThiFormQuanLySanPham(string name)
         {
-            if(!HienThiForm(name))
+            if (!HienThiForm(name))
             {
                 FormQL_SanPham formQL_SanPham = new FormQL_SanPham();
                 formQL_SanPham.MdiParent = this;
                 formQL_SanPham.Show();
-            
             }
-
-           
         }
 
         private void HienThiFormDangNhap(string name)
@@ -93,11 +97,10 @@ namespace WindowsFormsApp2
         {
             Employee employee = (Employee)sender;
             // lấy danh sách các quyền 
-            tendangnhap = employee.Name;
-            this.Text = "Hello " + tendangnhap;
+            string ten = FormDangNhap.tenNhanVien = employee.Name;
+            this.Text = "Nhân viên: " + ten;
             DanhSachQuyen = employee.RoleDetails.Select(x => x.Role.NameRole).ToList();
             KhoaChucNangHeThong(true);
-          
         }
 
         private void tsmThoat_Click(object sender, EventArgs e)
@@ -107,17 +110,17 @@ namespace WindowsFormsApp2
 
         private void FormTrangChu_Load(object sender, EventArgs e)
         {
-
+            //HienThiFormDatHang("tsmDatHang");
             KhoaChucNangHeThong(false);
-         
+
         }
 
         private void tsmDangXuat_Click(object sender, EventArgs e)
         {
             foreach (var item in this.MdiChildren)
             {
-                item.Close(); 
-               
+                item.Close();
+
             }
             this.Text = "Hello ";
             KhoaChucNangHeThong(false);
