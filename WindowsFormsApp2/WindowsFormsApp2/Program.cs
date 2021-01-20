@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApp2.Views;
+using WindowsFormsApp2.Views.DanhThuReport;
 
 namespace WindowsFormsApp2
 {
@@ -17,7 +18,7 @@ namespace WindowsFormsApp2
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormTrangChu());
+            Application.Run(new DoanhThuReportForm());
         }
     }
 }
