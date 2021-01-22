@@ -52,6 +52,10 @@ namespace WindowsFormsApp2.Models
                 .Property(e => e.Amount)
                 .HasPrecision(18, 0);
 
+            modelBuilder.Entity<ProductDetail>()
+                .Property(e => e.UnitPrice)
+                .HasPrecision(18, 0);
+
             modelBuilder.Entity<Role>()
                 .HasMany(e => e.RoleDetails)
                 .WithOptional(e => e.Role)

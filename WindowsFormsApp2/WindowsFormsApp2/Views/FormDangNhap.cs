@@ -27,7 +27,6 @@ namespace WindowsFormsApp2.Views
         {
             if (KiemTraInput())
             {
-
                 string userName = txtUserName.Text;
                 string password = MD5Hash(txtPassword.Text);
                 Employee employee = context.Employees.Where(x => x.UserName == userName && x.Password == password).FirstOrDefault();
@@ -36,14 +35,13 @@ namespace WindowsFormsApp2.Views
                 {
                     chungThucTaiKhoan(employee);
                     this.Close();
+
                 }
                 else
                 {
                     MessageBox.Show("Vui lòng nhập đúng thông tin");
                     return;
                 }
-
-
             }
         }
 
