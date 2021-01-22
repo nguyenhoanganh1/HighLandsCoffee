@@ -12,6 +12,7 @@ namespace WindowsFormsApp2.Views.ThongKeBaoCao.cac
 
         public int Quantity { get; set; }
 
+
         public decimal UnitPrice { get; set; }
 
         public int OrderId { get; set; }

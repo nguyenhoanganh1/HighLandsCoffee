@@ -29,42 +29,85 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
-            this.DoanhThuBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource5 = new Microsoft.Reporting.WinForms.ReportDataSource();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
+            this.dtpFrom = new System.Windows.Forms.DateTimePicker();
+            this.dtpTo = new System.Windows.Forms.DateTimePicker();
+            this.btnXuatBaoCao = new System.Windows.Forms.Button();
+            this.DoanhThuBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DoanhThuBindingSource)).BeginInit();
             this.SuspendLayout();
-            // 
-            // DoanhThuBindingSource
-            // 
-            this.DoanhThuBindingSource.DataSource = typeof(WindowsFormsApp2.Views.ThongKeBaoCao.cac.DoanhThu);
             // 
             // reportViewer1
             // 
             this.reportViewer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            reportDataSource1.Name = "DoanhThuDataSet";
-            reportDataSource1.Value = this.DoanhThuBindingSource;
-            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource1);
+            reportDataSource5.Name = "DoanhThuDataSet";
+            reportDataSource5.Value = this.DoanhThuBindingSource;
+            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource5);
             this.reportViewer1.LocalReport.ReportEmbeddedResource = "WindowsFormsApp2.Views.ThongKeBaoCao.cac.ReportDoanhThu.rdlc";
-            this.reportViewer1.Location = new System.Drawing.Point(24, 38);
+            this.reportViewer1.Location = new System.Drawing.Point(24, 136);
             this.reportViewer1.Name = "reportViewer1";
             this.reportViewer1.ServerReport.BearerToken = null;
-            this.reportViewer1.Size = new System.Drawing.Size(764, 400);
+            this.reportViewer1.Size = new System.Drawing.Size(764, 302);
             this.reportViewer1.TabIndex = 0;
+            // 
+            // dtpFrom
+            // 
+            this.dtpFrom.Location = new System.Drawing.Point(172, 90);
+            this.dtpFrom.Name = "dtpFrom";
+            this.dtpFrom.Size = new System.Drawing.Size(200, 20);
+            this.dtpFrom.TabIndex = 1;
+            // 
+            // dtpTo
+            // 
+            this.dtpTo.Location = new System.Drawing.Point(402, 90);
+            this.dtpTo.Name = "dtpTo";
+            this.dtpTo.Size = new System.Drawing.Size(200, 20);
+            this.dtpTo.TabIndex = 2;
+            // 
+            // btnXuatBaoCao
+            // 
+            this.btnXuatBaoCao.Location = new System.Drawing.Point(628, 87);
+            this.btnXuatBaoCao.Name = "btnXuatBaoCao";
+            this.btnXuatBaoCao.Size = new System.Drawing.Size(135, 23);
+            this.btnXuatBaoCao.TabIndex = 3;
+            this.btnXuatBaoCao.Text = "Xuất báo cáo";
+            this.btnXuatBaoCao.UseVisualStyleBackColor = true;
+            this.btnXuatBaoCao.Click += new System.EventHandler(this.btnXuatBaoCao_Click);
+            // 
+            // DoanhThuBindingSource
+            // 
+            this.DoanhThuBindingSource.DataSource = typeof(WindowsFormsApp2.Views.ThongKeBaoCao.cac.DoanhThu);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(378, 94);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(18, 20);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "~";
             // 
             // FormDoanhThu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.btnXuatBaoCao);
+            this.Controls.Add(this.dtpTo);
+            this.Controls.Add(this.dtpFrom);
             this.Controls.Add(this.reportViewer1);
             this.Name = "FormDoanhThu";
             this.Text = "FormDoanhThu";
             this.Load += new System.EventHandler(this.FormDoanhThu_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DoanhThuBindingSource)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -72,5 +115,9 @@
 
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
         private System.Windows.Forms.BindingSource DoanhThuBindingSource;
+        private System.Windows.Forms.DateTimePicker dtpFrom;
+        private System.Windows.Forms.DateTimePicker dtpTo;
+        private System.Windows.Forms.Button btnXuatBaoCao;
+        private System.Windows.Forms.Label label1;
     }
 }

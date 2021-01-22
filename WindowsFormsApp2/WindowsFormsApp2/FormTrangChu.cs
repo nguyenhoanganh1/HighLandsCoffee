@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApp2.Models;
 using WindowsFormsApp2.Views;
-
+using WindowsFormsApp2.Views.ThongKeBaoCao;
+using WindowsFormsApp2.Views.ThongKeBaoCao.cac;
 
 namespace WindowsFormsApp2
 {
@@ -99,9 +100,9 @@ namespace WindowsFormsApp2
         {
             if (!HienThiForm(name))
             {
-                //DoanhThuForm form = new DoanhThuForm();
-                //form.MdiParent = this;
-                //form.Show();
+                FormDoanhThu form = new FormDoanhThu();
+                form.MdiParent = this;
+                form.Show();
             }
         }
 
@@ -191,7 +192,18 @@ namespace WindowsFormsApp2
         {
             HienThiFormQLKhachHang("tsmQuanLyKhachHang");
         }
-
-
+        public void HienThiFormTonKho(string name)
+        {
+            if (!HienThiForm(name))
+            {
+                FormTonKho f = new FormTonKho();
+                f.MdiParent = this;
+                f.Show();
+            }
+        }
+        private void tsmTonKho_Click(object sender, EventArgs e)
+        {
+            HienThiFormTonKho("tsmQuanLyKhachHang");
+        }
     }
 }
