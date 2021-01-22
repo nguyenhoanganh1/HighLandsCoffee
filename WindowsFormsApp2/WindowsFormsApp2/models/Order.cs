@@ -16,10 +16,6 @@ namespace WindowsFormsApp2.Models
 
         public int Id { get; set; }
 
-        [StringLength(200)]
-        public string Address { get; set; }
-
-        [Column(TypeName = "date")]
         public DateTime? OrderDate { get; set; }
 
         public decimal? Amount { get; set; }

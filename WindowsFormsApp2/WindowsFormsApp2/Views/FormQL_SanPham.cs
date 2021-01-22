@@ -66,7 +66,7 @@ namespace WindowsFormsApp2.Views
         {
             this.cbGiamGia.DataSource = discounts;
             this.cbGiamGia.ValueMember = "Id";
-            this.cbGiamGia.DisplayMember = "Name";
+            this.cbGiamGia.DisplayMember = "Discount1";
         }
 
         public void Display()
@@ -139,53 +139,52 @@ namespace WindowsFormsApp2.Views
 
         private void btnLuu_Click(object sender, EventArgs e)
         {
-            try
-            {
+            /*try
+            {*/
 
-                MemoryStream stream = new MemoryStream();
-                pbPhoto.Image.Save(stream, ImageFormat.Jpeg);
-                Product productId = context.Products.FirstOrDefault(p => p.id.ToString() == txtId.Text);
-                if (productId != null)
+            MemoryStream stream = new MemoryStream();
+            pbPhoto.Image.Save(stream, ImageFormat.Jpeg);
+            Product productId = context.Products.FirstOrDefault(p => p.id.ToString() == txtId.Text);
+            if (productId != null)
+            {
+                productId.Name = txtTen.Text;
+                productId.Quantity = Convert.ToInt32(txtSoLuong.Text);
+                productId.ProductDate = Convert.ToDateTime(dtpNgay.Text);
+                productId.UnitPrice = Convert.ToDouble(txtGia.Text);
+                productId.Description = txtMoTa.Text;
+                productId.Images = stream.ToArray();
+                productId.SupplierId = Convert.ToInt32(cbNhaCungCap.SelectedValue.ToString());
+                productId.CategoryId = Convert.ToInt32(cbLoai.SelectedValue.ToString());
+                productId.DiscountId = Convert.ToInt32(cbGiamGia.SelectedValue.ToString());
+                DialogResult dialogResult = MessageBox.Show("Bạn có muốn sửa không?", "Nhấn Yes Để Sửa", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
                 {
-                    productId.Name = txtTen.Text;
-                    productId.Quantity = Convert.ToInt32(txtSoLuong.Text);
-                    productId.ProductDate = Convert.ToDateTime(dtpNgay.Text);
-                    productId.UnitPrice = Convert.ToDouble(txtGia.Text);
-                    productId.Description = txtMoTa.Text;
-                    productId.Images = stream.ToArray();
-                    productId.SupplierId = Convert.ToInt32(cbNhaCungCap.SelectedValue.ToString());
-                    productId.CategoryId = Convert.ToInt32(cbLoai.SelectedValue.ToString());
-                    productId.DiscountId = Convert.ToInt32(cbGiamGia.SelectedValue.ToString());
-                    DialogResult dialogResult = MessageBox.Show("Bạn có muốn sửa không?", "Nhấn Yes Để Sửa", MessageBoxButtons.YesNo);
-                    if (dialogResult == DialogResult.Yes)
-                    {
-                        context.SaveChanges();
-                        MessageBox.Show("Sửa thành công");
-                    }
-                }
-                else
-                {
-                    Product product = new Product();
-                    product.Name = txtTen.Text;
-                    product.Quantity = Convert.ToInt32(txtSoLuong.Text);
-                    product.ProductDate = Convert.ToDateTime(dtpNgay.Text);
-                    product.UnitPrice = Convert.ToDouble(txtGia.Text);
-                    product.Description = txtMoTa.Text;
-                    product.Images = stream.ToArray();
-                    product.SupplierId = Convert.ToInt32(cbNhaCungCap.SelectedValue.ToString());
-                    product.CategoryId = Convert.ToInt32(cbLoai.SelectedValue.ToString());
-                    product.DiscountId = Convert.ToInt32(cbGiamGia.SelectedValue.ToString());
-                    context.Products.Add(product);
                     context.SaveChanges();
-                    MessageBox.Show("Thêm sản phẩm thành công");
                 }
-
-                Display();
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message);
+                Product product = new Product();
+                product.Name = txtTen.Text;
+                product.Quantity = Convert.ToInt32(txtSoLuong.Text);
+                product.ProductDate = Convert.ToDateTime(dtpNgay.Text);
+                product.UnitPrice = Convert.ToDouble(txtGia.Text);
+                product.Description = txtMoTa.Text;
+                product.Images = stream.ToArray();
+                product.SupplierId = Convert.ToInt32(cbNhaCungCap.SelectedValue.ToString());
+                product.CategoryId = Convert.ToInt32(cbLoai.SelectedValue.ToString());
+                product.DiscountId = Convert.ToInt32(cbGiamGia.SelectedValue.ToString());
+                context.Products.Add(product);
+                context.SaveChanges();
+                MessageBox.Show("Thêm sản phẩm thành công");
             }
+
+            Display();
+            /*  }
+              catch (Exception ex)
+              {
+                  MessageBox.Show(ex.Message);
+              }*/
         }
 
         private void btnThoat_Click(object sender, EventArgs e)

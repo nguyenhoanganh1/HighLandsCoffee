@@ -12,7 +12,7 @@ namespace WindowsFormsApp2.Models
 
         public int? Quantity { get; set; }
 
-        public double? UnitPrice { get; set; }
+        public decimal? UnitPrice { get; set; }
 
         public int? OrderId { get; set; }
 

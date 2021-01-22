@@ -9,11 +9,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApp2.Models;
+using static WindowsFormsApp2.Views.FormDangNhap;
 
 namespace WindowsFormsApp2.Views
 {
     public partial class FormDatHang : Form
     {
+        public static List<string> DanhSachQuyen;
         Model1 context = new Model1();
         public FormDatHang()
         {
@@ -22,12 +24,21 @@ namespace WindowsFormsApp2.Views
 
         private void FormDatHang_Load(object sender, EventArgs e)
         {
+
+            HienThi(false);
             SettingForm();
             Display();
-            dgvDatHang.Visible = false;
+        }
+        private void ChungThucTaiKhoan(object sender)
+        {
+            Employee employee = (Employee)sender;
+            // lấy danh sách các quyền 
+            string ten = FormDangNhap.tenNhanVien = employee.Name;
+            this.Text = "Nhân viên: " + ten;
+            DanhSachQuyen = employee.RoleDetails.Select(x => x.Role.NameRole).ToList();
+
 
         }
-
         public void Display()
         {
 
@@ -53,14 +64,6 @@ namespace WindowsFormsApp2.Views
             dgvDanhSachSanPham.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
 
-        private void dgvDanhSachSanPham_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            /* txtId.Text = dgvDanhSachSanPham.SelectedRows[0].Cells[0].Value.ToString();
-             Product product = context.Products.FirstOrDefault(p => p.id.ToString() == txtId.Text);
-             MemoryStream stream = new MemoryStream(product.Images.ToArray());
-             Image img = Image.FromStream(stream);
-             pbPhoto.Image = img;*/
-        }
 
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
@@ -70,13 +73,10 @@ namespace WindowsFormsApp2.Views
         {
             try
             {
-                dgvDatHang.Rows.Clear();
-                txtTongTien.Text = "0";
+
                 txtNgayTao.Text = Convert.ToString(DateTime.Now);
-
                 int ma = context.Orders.Select(x => x.Id).Max();
-                txtMaHoaDon1.Text = (ma + 1).ToString();
-
+                txtMaHoaDon.Text = (ma + 1).ToString();
                 Order orderId = context.Orders.Where(x => x.Id == ma + 1).FirstOrDefault();
                 if (orderId != null)
                 {
@@ -84,18 +84,14 @@ namespace WindowsFormsApp2.Views
                 }
                 else
                 {
-
-                    dgvDatHang.Visible = true;
                     Order order = new Order();
                     order.Id = ma;
-                    order.Address = txtDiaChi.Text;
-                    order.OrderDate = DateTime.Now;
-                    order.Amount = Convert.ToDecimal(txtTongTien.Text);
+                    order.OrderDate = Convert.ToDateTime(txtNgayTao.Text);
+                    order.CustomerId = Convert.ToInt32(txtMaKhachHang.Text);
                     context.Orders.Add(order);
                     context.SaveChanges();
                 }
 
-
             }
             catch (Exception ex)
             {
@@ -103,107 +99,7 @@ namespace WindowsFormsApp2.Views
             }
         }
 
-        private void dgvDanhSachSanPham_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
 
-                if (string.IsNullOrWhiteSpace(txtMaHoaDon1.Text))
-                {
-                    MessageBox.Show("Vui lòng tạo hóa đơn");
-                }
-                else
-                {
-
-                    string id = dgvDanhSachSanPham.SelectedRows[0].Cells[0].Value.ToString();
-                    string name = dgvDanhSachSanPham.SelectedRows[0].Cells[1].Value.ToString();
-                    int soluong = 1;
-                    double gia = Convert.ToDouble(dgvDanhSachSanPham.SelectedRows[0].Cells[4].Value.ToString());
-                    string mota = dgvDanhSachSanPham.SelectedRows[0].Cells[5].Value.ToString();
-                    string loai = dgvDanhSachSanPham.SelectedRows[0].Cells[7].Value.ToString();
-                    string nhaCungCap = dgvDanhSachSanPham.SelectedRows[0].Cells[8].Value.ToString();
-                    string maGiamGia = dgvDanhSachSanPham.SelectedRows[0].Cells[9].Value.ToString();
-                    txtId.Text = id;
-                    dgvDatHang.ColumnCount = 8;
-                    dgvDatHang.Columns[0].Name = "Mã Sản phẩm";
-                    dgvDatHang.Columns[1].Name = "Tên sản phẩm";
-                    dgvDatHang.Columns[2].Name = "số lượng";
-                    dgvDatHang.Columns[3].Name = "giá";
-                    dgvDatHang.Columns[4].Name = "Mô Tả";
-                    dgvDatHang.Columns[5].Name = "Loại";
-                    dgvDatHang.Columns[6].Name = "Nhà Cung Cấp";
-                    dgvDatHang.Columns[7].Name = "Mã giảm giá";
-                    string[] row = new string[]
-                    {
-                            id, name, soluong.ToString(), gia.ToString(), mota,loai,nhaCungCap,maGiamGia
-                    };
-                    ProductDetail productDetail = new ProductDetail();
-                    dgvDatHang.Rows.Add(row);
-                    productDetail.OrderId = Convert.ToInt32(txtMaHoaDon1.Text);
-                    productDetail.ProductId = Convert.ToInt32(txtId.Text);
-                    productDetail.Quantity = soluong;
-                    productDetail.UnitPrice = gia;
-                    context.ProductDetails.Add(productDetail);
-                    context.SaveChanges();
-                    // Nếu như Id Order và Id Sản phẩm = id order va id sản phẩm thì tính tiền
-                    //txtTongTien.Text = context.ProductDetails.Where(x => x.OrderId == productDetail.OrderId).Sum(x => (x.Quantity * x.UnitPrice) - ((x.Quantity * x.UnitPrice) * (x.Product.Discount.Discount1 * 0.01))).Value.ToString();
-
-                    Product product = context.Products.Where(x => x.id.ToString() == txtId.Text).FirstOrDefault();
-
-                    if (product.Discount.Discount1.Equals(5))
-                    {
-                        double g = context.ProductDetails.Where(x => x.OrderId == productDetail.OrderId).Sum(x => (x.Quantity * x.UnitPrice) * 0.05).Value;
-                        txtTongTien.Text = context.ProductDetails.Where(x => x.OrderId == productDetail.OrderId).Sum(x => (x.Quantity * x.UnitPrice) - g).Value.ToString();
-                        Product p = context.Products.Where(x => x.id.ToString() == txtId.Text).FirstOrDefault();
-                        if (p != null)
-                        {
-                            p.Quantity -= soluong;
-                            context.SaveChanges();
-                        }
-
-                    }
-                    else if (product.Discount.Discount1.Equals(10))
-                    {
-                        double g = context.ProductDetails.Where(x => x.OrderId == productDetail.OrderId).Sum(x => (x.Quantity * x.UnitPrice) * 0.10).Value;
-                        txtTongTien.Text = context.ProductDetails.Where(x => x.OrderId == productDetail.OrderId).Sum(x => (x.Quantity * x.UnitPrice) - g).Value.ToString();
-                        Product p = context.Products.Where(x => x.id.ToString() == txtId.Text).FirstOrDefault();
-                        if (p != null)
-                        {
-                            p.Quantity -= soluong;
-                            context.SaveChanges();
-                        }
-                    }
-                    else if (product.Discount.Discount1.Equals(15))
-                    {
-                        double g = context.ProductDetails.Where(x => x.OrderId == productDetail.OrderId).Sum(x => (x.Quantity * x.UnitPrice) * 0.15).Value;
-                        txtTongTien.Text = context.ProductDetails.Where(x => x.OrderId == productDetail.OrderId).Sum(x => (x.Quantity * x.UnitPrice) - g).Value.ToString();
-                        Product p = context.Products.Where(x => x.id.ToString() == txtId.Text).FirstOrDefault();
-                        if (p != null)
-                            if (string.IsNullOrEmpty(txtMaHoaDon1.Text))
-                            {
-                                p.Quantity -= soluong;
-                                context.SaveChanges();
-                                MessageBox.Show("Vui lòng tạo hóa đơn");
-                            }
-                    }
-                    else if (product.Discount.Discount1.Equals(20))
-                    {
-                        double g = context.ProductDetails.Where(x => x.OrderId == productDetail.OrderId).Sum(x => (x.Quantity * x.UnitPrice) * 0.20).Value;
-                        txtTongTien.Text = context.ProductDetails.Where(x => x.OrderId == productDetail.OrderId).Sum(x => (x.Quantity * x.UnitPrice) - g).Value.ToString();
-                        Product p = context.Products.Where(x => x.id.ToString() == txtId.Text).FirstOrDefault();
-
-
-                    }
-                }
-                Display();
-            }
-
-
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
         private void btnThoat_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -211,25 +107,55 @@ namespace WindowsFormsApp2.Views
 
         private void btnThanhToan_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtMaHoaDon1.Text))
+            if (string.IsNullOrEmpty(txtMaHoaDon.Text))
             {
                 MessageBox.Show("Vui lòng tạo hóa đơn");
+            }
+            else if (string.IsNullOrWhiteSpace(txtMaKhachHang.Text))
+            {
+                MessageBox.Show("Vui lòng nhập mã khách hàng");
+
             }
             else
             {
 
-                context.Orders.Where(x => x.Id.ToString() == txtMaHoaDon1.Text).FirstOrDefault().Amount = Convert.ToDecimal(txtTongTien.Text);
-                context.Orders.Where(x => x.Id.ToString() == txtMaHoaDon1.Text).FirstOrDefault().Address = txtDiaChi.Text;
-                context.SaveChanges();
+                ProductDetail productDetail = new ProductDetail();
 
+                for (int i = 0; i < dgvDatHang.Rows.Count - 1; i++)
+                {
+                    if (dgvDatHang.Rows.Count > 0)
+                    {
+                        productDetail.OrderId = Convert.ToInt32(txtMaHoaDon.Text);
+                        productDetail.ProductId = Convert.ToInt32(dgvDatHang.Rows[i].Cells[0].Value.ToString());
+                        productDetail.Quantity = Convert.ToInt32(dgvDatHang.Rows[i].Cells[2].Value.ToString());
+                        productDetail.UnitPrice = Convert.ToInt32(dgvDatHang.Rows[i].Cells[3].Value.ToString());
+                        context.ProductDetails.Add(productDetail);
+                        int m = Convert.ToInt32(dgvDatHang.Rows[i].Cells[0].Value.ToString());
+                        Product p = context.Products.Where(x => x.id == m).FirstOrDefault();
+                        if (p != null)
+                        {
+                            p.Quantity -= Convert.ToInt32(dgvDatHang.Rows[i].Cells[2].Value.ToString());
+                        }
+                    }
+                }
+                context.Orders.Where(x => x.Id.ToString() == txtMaHoaDon.Text).FirstOrDefault().CustomerId = Convert.ToInt32(txtMaKhachHang.Text);
+                context.Orders.Where(x => x.Id.ToString() == txtMaHoaDon.Text).FirstOrDefault().Amount = Convert.ToDecimal(txtTongTien.Text);
+                context.SaveChanges();
                 clear();
-                MessageBox.Show("Thanh Toán Thành Công ");
+                Display();
             }
         }
+
+        public void HienThi(bool b)
+        {
+            groupHoaDon.Visible = b;
+
+        }
+
         private void clear()
         {
             dgvDatHang.Rows.Clear();
-            txtDiaChi.Text = txtMaHoaDon1.Text = txtNgayTao.Text = txtTongTien.Text = txtId.Text = " ";
+            txtMaHoaDon.Text = txtNgayTao.Text = txtTongTien.Text = "";
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -252,6 +178,86 @@ namespace WindowsFormsApp2.Views
             }).Where(x => x.name.Contains(search) || x.supplierId.Contains(search)).ToList();
             dgvDanhSachSanPham.DataSource = _studentList;
 
+        }
+
+        private void btnThemGioHang_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtMaSanPham.Text))
+            {
+                MessageBox.Show("Vui lòng nhập mã sản phẩm");
+
+            }
+            else if (string.IsNullOrWhiteSpace(txtMaKhachHang.Text))
+            {
+                MessageBox.Show("Vui lòng nhập mã khách hàng");
+
+            }
+            else if (string.IsNullOrWhiteSpace(txtSoLuong.Text))
+            {
+                MessageBox.Show("Vui lòng nhập số lượng");
+            }
+            else
+            {
+                int sl = 0;
+                double gia = 0;
+                double giamgia = 0;
+                double sum = 0;
+
+                Product p = context.Products.Where(x => x.id.ToString() == txtMaSanPham.Text).FirstOrDefault();
+                p.Quantity = Convert.ToInt32(txtSoLuong.Text);
+                dgvDatHang.ColumnCount = 8;
+                dgvDatHang.Columns[0].Name = "Mã Sản phẩm";
+                dgvDatHang.Columns[1].Name = "Tên sản phẩm";
+                dgvDatHang.Columns[2].Name = "số lượng";
+                dgvDatHang.Columns[3].Name = "giá";
+                dgvDatHang.Columns[4].Name = "Mô Tả";
+                dgvDatHang.Columns[5].Name = "Loại";
+                dgvDatHang.Columns[6].Name = "Nhà Cung Cấp";
+                dgvDatHang.Columns[7].Name = "Mã giảm giá";
+
+                string[] row = new string[]
+                {
+                   p.id.ToString(),
+                   p.Name,
+                   p.Quantity.ToString(),
+                   p.UnitPrice.ToString(),
+                   p.Description,
+                   p.CategoryProduct.Name,
+                   p.Supplier.Name,
+                   p.Discount.Discount1.ToString()
+                };
+                dgvDatHang.Rows.Add(row);
+
+
+                for (int i = 0; i < dgvDatHang.Rows.Count - 1; i++)
+                {
+                    if (dgvDatHang.Rows.Count > 0)
+                    {
+                        sl = Convert.ToInt32(dgvDatHang.Rows[i].Cells[2].Value.ToString());
+                        gia = Convert.ToDouble(dgvDatHang.Rows[i].Cells[3].Value.ToString());
+                        giamgia = Convert.ToDouble(dgvDatHang.Rows[i].Cells[7].Value.ToString());
+
+                        sum += (gia * sl) - ((gia * sl) * (giamgia * 0.01));
+                    }
+                    txtTongTien.Text = sum.ToString();
+                }
+                HienThi(true);
+            }
+
+        }
+
+        private void dgvDanhSachSanPham_CellClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            foreach (DataGridViewRow row in dgvDanhSachSanPham.SelectedRows)
+            {
+                txtMaSanPham.Text = row.Cells[0].Value.ToString();
+            }
+        }
+
+        private void btnNhapThongTinKhachHang_Click(object sender, EventArgs e)
+        {
+            FormQLKhachHang f = new FormQLKhachHang();
+            f.ShowDialog();
         }
 
 
