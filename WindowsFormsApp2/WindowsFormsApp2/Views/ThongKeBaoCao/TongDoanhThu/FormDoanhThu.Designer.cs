@@ -29,24 +29,28 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource5 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            this.DoanhThuBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.dtpFrom = new System.Windows.Forms.DateTimePicker();
             this.dtpTo = new System.Windows.Forms.DateTimePicker();
             this.btnXuatBaoCao = new System.Windows.Forms.Button();
-            this.DoanhThuBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DoanhThuBindingSource)).BeginInit();
             this.SuspendLayout();
+            // 
+            // DoanhThuBindingSource
+            // 
+            this.DoanhThuBindingSource.DataSource = typeof(WindowsFormsApp2.Views.ThongKeBaoCao.cac.DoanhThu);
             // 
             // reportViewer1
             // 
             this.reportViewer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            reportDataSource5.Name = "DoanhThuDataSet";
-            reportDataSource5.Value = this.DoanhThuBindingSource;
-            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource5);
+            reportDataSource1.Name = "DoanhThuDataSet";
+            reportDataSource1.Value = this.DoanhThuBindingSource;
+            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource1);
             this.reportViewer1.LocalReport.ReportEmbeddedResource = "WindowsFormsApp2.Views.ThongKeBaoCao.cac.ReportDoanhThu.rdlc";
             this.reportViewer1.Location = new System.Drawing.Point(24, 136);
             this.reportViewer1.Name = "reportViewer1";
@@ -78,10 +82,6 @@
             this.btnXuatBaoCao.UseVisualStyleBackColor = true;
             this.btnXuatBaoCao.Click += new System.EventHandler(this.btnXuatBaoCao_Click);
             // 
-            // DoanhThuBindingSource
-            // 
-            this.DoanhThuBindingSource.DataSource = typeof(WindowsFormsApp2.Views.ThongKeBaoCao.cac.DoanhThu);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -103,6 +103,7 @@
             this.Controls.Add(this.dtpFrom);
             this.Controls.Add(this.reportViewer1);
             this.Name = "FormDoanhThu";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormDoanhThu";
             this.Load += new System.EventHandler(this.FormDoanhThu_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DoanhThuBindingSource)).EndInit();
