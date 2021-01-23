@@ -11,6 +11,7 @@ namespace WindowsFormsApp2.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Supplier()
         {
+            PhieuGiaoHangs = new HashSet<PhieuGiaoHang>();
             Products = new HashSet<Product>();
         }
 
@@ -22,7 +23,11 @@ namespace WindowsFormsApp2.Models
         [StringLength(100)]
         public string Address { get; set; }
 
-        public int? Phone { get; set; }
+        [StringLength(12)]
+        public string Phone { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PhieuGiaoHang> PhieuGiaoHangs { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Products { get; set; }

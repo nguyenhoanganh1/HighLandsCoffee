@@ -17,6 +17,7 @@ namespace WindowsFormsApp2.Models
         public virtual DbSet<Discount> Discounts { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<PhieuGiaoHang> PhieuGiaoHangs { get; set; }
         public virtual DbSet<ProductDetail> ProductDetails { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
@@ -52,6 +53,10 @@ namespace WindowsFormsApp2.Models
                 .Property(e => e.Amount)
                 .HasPrecision(18, 0);
 
+            modelBuilder.Entity<PhieuGiaoHang>()
+                .Property(e => e.DonGia)
+                .HasPrecision(18, 0);
+
             modelBuilder.Entity<ProductDetail>()
                 .Property(e => e.UnitPrice)
                 .HasPrecision(18, 0);
@@ -60,6 +65,16 @@ namespace WindowsFormsApp2.Models
                 .HasMany(e => e.RoleDetails)
                 .WithOptional(e => e.Role)
                 .HasForeignKey(e => e.IdRole);
+
+            modelBuilder.Entity<Supplier>()
+                .Property(e => e.Phone)
+                .IsFixedLength()
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Supplier>()
+                .HasMany(e => e.PhieuGiaoHangs)
+                .WithOptional(e => e.Supplier)
+                .HasForeignKey(e => e.maNCC);
         }
     }
 }

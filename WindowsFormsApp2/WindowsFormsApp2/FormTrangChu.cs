@@ -119,6 +119,8 @@ namespace WindowsFormsApp2
             if (DanhSachQuyen.Contains("bán hàng"))
             {
                 tsmDatHang.Enabled = true;
+                tsmDangNhap.Enabled = false;
+                tsmQuenMatKhau.Enabled = false;
                 tsmDangXuat.Enabled = true;
             }
             else if (DanhSachQuyen.Contains("admin"))
@@ -128,15 +130,21 @@ namespace WindowsFormsApp2
             else if (DanhSachQuyen.Contains("quản lý"))
             {
                 tsmDanhMucQuanLy.Enabled = true;
+                tsmDangNhap.Enabled = false;
+                tsmQuenMatKhau.Enabled = false;
                 tsmDangXuat.Enabled = true;
             }
             else if (DanhSachQuyen.Contains("thủ kho"))
             {
+                tsmDangNhap.Enabled = false;
+                tsmQuenMatKhau.Enabled = false;
                 tsmLapPhieuGhiNhan.Enabled = true;
                 tsmDangXuat.Enabled = true;
             }
             else if (DanhSachQuyen.Contains("kế toán"))
             {
+                tsmDangNhap.Enabled = false;
+                tsmQuenMatKhau.Enabled = false;
                 tsmThongKe.Enabled = true;
                 tsmDangXuat.Enabled = true;
             }
@@ -204,6 +212,61 @@ namespace WindowsFormsApp2
         private void tsmTonKho_Click(object sender, EventArgs e)
         {
             HienThiFormTonKho("tsmQuanLyKhachHang");
+        }
+
+        public void HienThiFormNhanVien(string name)
+        {
+            if (!HienThiForm(name))
+            {
+                FormQuanLyNhanVien f = new FormQuanLyNhanVien();
+                f.MdiParent = this;
+                f.Show();
+            }
+        }
+
+        private void tsmQuanLyNhanVien_Click(object sender, EventArgs e)
+        {
+            HienThiFormNhanVien("tsmQuanLyNhanVien");
+        }
+        public void HienThiFormPhanQuyen(string name)
+        {
+            if (!HienThiForm(name))
+            {
+                FormPhanQuyen f = new FormPhanQuyen();
+                f.MdiParent = this;
+                f.Show();
+            }
+        }
+        private void quảnLýPhânQuyênToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HienThiFormPhanQuyen("tsmPhanQuyen");
+        }
+        public void HienThiFormKhuyenMai(string name)
+        {
+            if (!HienThiForm(name))
+            {
+                FormKhuyenMai f = new FormKhuyenMai();
+                f.MdiParent = this;
+                f.Show();
+            }
+        }
+
+        private void tsmKhuyenMai_Click(object sender, EventArgs e)
+        {
+            HienThiFormKhuyenMai("tsmKhuyenMai");
+        }
+        public void HienThiFormNhaCungCap(string name)
+        {
+            if (!HienThiForm(name))
+            {
+                FormNhaCungCap f = new FormNhaCungCap();
+                f.MdiParent = this;
+                f.Show();
+            }
+        }
+        private void tsmNhaCungCap_Click(object sender, EventArgs e)
+        {
+            HienThiFormNhaCungCap("tsmNhaCungCap");
         }
     }
 }
