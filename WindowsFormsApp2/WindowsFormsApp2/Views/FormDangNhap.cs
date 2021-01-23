@@ -15,6 +15,7 @@ namespace WindowsFormsApp2.Views
     public partial class FormDangNhap : Form
     {
         public static string tenNhanVien;
+        public static int maNhanVien;
         public event ChungThucTaiKhoan chungThucTaiKhoan;
         public delegate void ChungThucTaiKhoan(object sender);
         Model1 context = new Model1();
@@ -79,6 +80,13 @@ namespace WindowsFormsApp2.Views
 
         private void btnThoat_Click(object sender, EventArgs e)
         {
+            this.Close();
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            FormQuenMatKhau f = new FormQuenMatKhau();
+            f.Show();
             this.Close();
         }
     }
