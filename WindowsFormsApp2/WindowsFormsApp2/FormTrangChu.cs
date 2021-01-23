@@ -294,5 +294,20 @@ namespace WindowsFormsApp2
         {
             HienThiFormThayDoiMatKhau("tsmThayDoiMatKhau");
         }
+
+        public void HienThiFormNhanHang(string name)
+        {
+            if (!HienThiForm(name))
+            {
+                Form_Nhan_Hang f = new Form_Nhan_Hang();
+                f.MdiParent = this;
+                f.Show();
+            }
+        }
+
+        private void tsmLapPhieuGhiNhan_Click(object sender, EventArgs e)
+        {
+            HienThiFormNhanHang("tsmLapPhieuGhiNhan");
+        }
     }
 }
