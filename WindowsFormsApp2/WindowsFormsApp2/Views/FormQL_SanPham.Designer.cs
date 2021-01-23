@@ -197,9 +197,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(38, 111);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(32, 13);
+            this.label2.Size = new System.Drawing.Size(59, 13);
             this.label2.TabIndex = 18;
-            this.label2.Text = "Ngày";
+            this.label2.Text = "Ngày nhập";
             // 
             // label3
             // 
@@ -224,9 +224,9 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(38, 135);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(23, 13);
+            this.label5.Size = new System.Drawing.Size(44, 13);
             this.label5.TabIndex = 21;
-            this.label5.Text = "Giá";
+            this.label5.Text = "Đơn giá";
             // 
             // label6
             // 
