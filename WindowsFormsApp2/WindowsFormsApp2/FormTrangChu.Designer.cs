@@ -68,7 +68,7 @@
             this.tsmLapPhieuGhiNhan = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmDangNhapHeThong = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmDangNhap = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmQuenMatKhau = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmThayDoiMatKhau = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmTaoTaiKhoan = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmDangXuat = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
@@ -378,7 +378,7 @@
             // 
             this.tsmDangNhapHeThong.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmDangNhap,
-            this.tsmQuenMatKhau,
+            this.tsmThayDoiMatKhau,
             this.tsmTaoTaiKhoan,
             this.tsmDangXuat});
             this.tsmDangNhapHeThong.Name = "tsmDangNhapHeThong";
@@ -392,11 +392,12 @@
             this.tsmDangNhap.Text = "Đăng nhập";
             this.tsmDangNhap.Click += new System.EventHandler(this.tsmDangNhap_Click);
             // 
-            // tsmQuenMatKhau
+            // tsmThayDoiMatKhau
             // 
-            this.tsmQuenMatKhau.Name = "tsmQuenMatKhau";
-            this.tsmQuenMatKhau.Size = new System.Drawing.Size(180, 22);
-            this.tsmQuenMatKhau.Text = "Quên mật khẩu";
+            this.tsmThayDoiMatKhau.Name = "tsmThayDoiMatKhau";
+            this.tsmThayDoiMatKhau.Size = new System.Drawing.Size(180, 22);
+            this.tsmThayDoiMatKhau.Text = "Thay đổi mật khẩu";
+            this.tsmThayDoiMatKhau.Click += new System.EventHandler(this.tsmThayDoiMatKhau_Click);
             // 
             // tsmTaoTaiKhoan
             // 
@@ -464,7 +465,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsmDangNhapHeThong;
         private System.Windows.Forms.ToolStripMenuItem tsmDangNhap;
         private System.Windows.Forms.ToolStripMenuItem tsmDangXuat;
-        private System.Windows.Forms.ToolStripMenuItem tsmQuenMatKhau;
+        private System.Windows.Forms.ToolStripMenuItem tsmThayDoiMatKhau;
         private System.Windows.Forms.ToolStripMenuItem tsmTaoTaiKhoan;
         private System.Windows.Forms.ToolStripMenuItem tsmQuanLyNhanVien;
         private System.Windows.Forms.ToolStripMenuItem tsmQuanLyKhachHang;

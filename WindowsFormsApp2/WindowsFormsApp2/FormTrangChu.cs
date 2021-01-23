@@ -17,8 +17,7 @@ namespace WindowsFormsApp2
 {
     public partial class FormTrangChu : Form
     {
-        //public static int maNhanVien;
-        private string tendangnhap;
+
         public static List<string> DanhSachQuyen;
         public FormTrangChu()
         {
@@ -39,14 +38,14 @@ namespace WindowsFormsApp2
         }
         private void MoKhoaChucNangHeThong(bool islock)
         {
-            tsmQuenMatKhau.Enabled = islock;
+            tsmThayDoiMatKhau.Enabled = islock;
         }
         private void KhoaChucNangHeThong(bool islock)
         {
             // Cài đặt trạng thai
             tsmLapPhieuGhiNhan.Enabled = islock;
             tsmDatHang.Enabled = islock;
-            tsmQuenMatKhau.Enabled = !islock;
+            tsmThayDoiMatKhau.Enabled = islock;
             tsmTaoTaiKhoan.Enabled = islock;
             tsmDanhMucQuanLy.Enabled = islock;
             tsmDangXuat.Enabled = islock;
@@ -114,14 +113,14 @@ namespace WindowsFormsApp2
             Employee employee = (Employee)sender;
             // lấy danh sách các quyền 
             string ten = FormDangNhap.tenNhanVien = employee.Name;
-
+            FormDoiMatKhau.maNhanVien = employee.Id;
             DanhSachQuyen = employee.RoleDetails.Select(x => x.Role.NameRole).ToList();
             this.Text = "Nhân viên " + ten;
             if (DanhSachQuyen.Contains("bán hàng"))
             {
                 tsmDatHang.Enabled = true;
                 tsmDangNhap.Enabled = false;
-                tsmQuenMatKhau.Enabled = false;
+                tsmThayDoiMatKhau.Enabled = true;
                 tsmDangXuat.Enabled = true;
             }
             else if (DanhSachQuyen.Contains("admin"))
@@ -132,20 +131,20 @@ namespace WindowsFormsApp2
             {
                 tsmDanhMucQuanLy.Enabled = true;
                 tsmDangNhap.Enabled = false;
-                tsmQuenMatKhau.Enabled = false;
+                tsmThayDoiMatKhau.Enabled = true;
                 tsmDangXuat.Enabled = true;
             }
             else if (DanhSachQuyen.Contains("thủ kho"))
             {
                 tsmDangNhap.Enabled = false;
-                tsmQuenMatKhau.Enabled = false;
+                tsmThayDoiMatKhau.Enabled = true;
                 tsmLapPhieuGhiNhan.Enabled = true;
                 tsmDangXuat.Enabled = true;
             }
             else if (DanhSachQuyen.Contains("kế toán"))
             {
                 tsmDangNhap.Enabled = false;
-                tsmQuenMatKhau.Enabled = false;
+                tsmThayDoiMatKhau.Enabled = true;
                 tsmThongKe.Enabled = true;
                 tsmDangXuat.Enabled = true;
             }
@@ -173,9 +172,9 @@ namespace WindowsFormsApp2
                 item.Close();
 
             }
-            this.Text = "Hello ";
+            this.Text = "Form Trang Chủ";
             KhoaChucNangHeThong(false);
-            MessageBox.Show("Đăng xuất thành công");
+
         }
 
         private void tsmTrangChu_Click(object sender, EventArgs e)
@@ -281,6 +280,19 @@ namespace WindowsFormsApp2
         private void tsmLuong_Click(object sender, EventArgs e)
         {
             HienThiFormLuong(" tsmLuong");
+        }
+        public void HienThiFormThayDoiMatKhau(string name)
+        {
+            if (!HienThiForm(name))
+            {
+                FormDoiMatKhau f = new FormDoiMatKhau();
+                f.MdiParent = this;
+                f.Show();
+            }
+        }
+        private void tsmThayDoiMatKhau_Click(object sender, EventArgs e)
+        {
+            HienThiFormThayDoiMatKhau("tsmThayDoiMatKhau");
         }
     }
 }
