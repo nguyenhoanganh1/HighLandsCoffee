@@ -73,7 +73,6 @@ namespace WindowsFormsApp2.Views
         {
             try
             {
-
                 txtNgayTao.Text = Convert.ToString(DateTime.Now);
                 int ma = context.Orders.Select(x => x.Id).Max();
                 txtMaHoaDon.Text = (ma + 1).ToString();
@@ -227,7 +226,6 @@ namespace WindowsFormsApp2.Views
                    p.Discount.Discount1.ToString()
                 };
                 dgvDatHang.Rows.Add(row);
-
 
                 for (int i = 0; i < dgvDatHang.Rows.Count - 1; i++)
                 {

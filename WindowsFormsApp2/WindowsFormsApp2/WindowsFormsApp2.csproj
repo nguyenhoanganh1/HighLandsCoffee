@@ -173,6 +173,13 @@
     <Compile Include="Views\ThongKeBaoCao\FormTonKho.Designer.cs">
       <DependentUpon>FormTonKho.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\ThongKeBaoCao\LuongNhanVien.cs" />
+    <Compile Include="Views\ThongKeBaoCao\SalaryEmployee\FormSalary.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ThongKeBaoCao\SalaryEmployee\FormSalary.Designer.cs">
+      <DependentUpon>FormSalary.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\ThongKeBaoCao\TongDoanhThu\DoanhThu.cs" />
     <Compile Include="Views\ThongKeBaoCao\TongDoanhThu\FormDoanhThu.cs">
       <SubType>Form</SubType>
@@ -221,6 +228,10 @@
     <EmbeddedResource Include="Views\ThongKeBaoCao\FormTonKho.resx">
       <DependentUpon>FormTonKho.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\ThongKeBaoCao\SalaryEmployee\FormSalary.resx">
+      <DependentUpon>FormSalary.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ThongKeBaoCao\SalaryEmployee\LuongReport.rdlc" />
     <EmbeddedResource Include="Views\ThongKeBaoCao\TongDoanhThu\FormDoanhThu.resx">
       <DependentUpon>FormDoanhThu.cs</DependentUpon>
     </EmbeddedResource>
@@ -238,6 +249,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="WindowsFormsApp2.Views.ThongKeBaoCao.cac.DoanhThu.datasource" />
+    <None Include="WindowsFormsApp2.Views.ThongKeBaoCao.LuongNhanVien.datasource" />
     <None Include="WindowsFormsApp2.Views.ThongKeBaoCao.TonKho.TonKho.datasource" />
   </ItemGroup>
   <ItemGroup>

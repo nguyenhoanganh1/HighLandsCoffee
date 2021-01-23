@@ -11,6 +11,7 @@ using WindowsFormsApp2.Models;
 using WindowsFormsApp2.Views;
 using WindowsFormsApp2.Views.ThongKeBaoCao;
 using WindowsFormsApp2.Views.ThongKeBaoCao.cac;
+using WindowsFormsApp2.Views.ThongKeBaoCao.SalaryEmployee;
 
 namespace WindowsFormsApp2
 {
@@ -267,6 +268,19 @@ namespace WindowsFormsApp2
         private void tsmNhaCungCap_Click(object sender, EventArgs e)
         {
             HienThiFormNhaCungCap("tsmNhaCungCap");
+        }
+        public void HienThiFormLuong(string name)
+        {
+            if (!HienThiForm(name))
+            {
+                FormSalary f = new FormSalary();
+                f.MdiParent = this;
+                f.Show();
+            }
+        }
+        private void tsmLuong_Click(object sender, EventArgs e)
+        {
+            HienThiFormLuong(" tsmLuong");
         }
     }
 }
