@@ -106,43 +106,53 @@ namespace WindowsFormsApp2.Views
 
         private void btnThanhToan_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtMaHoaDon.Text))
+            try
             {
-                MessageBox.Show("Vui lòng tạo hóa đơn");
-            }
-            else if (string.IsNullOrWhiteSpace(txtMaKhachHang.Text))
-            {
-                MessageBox.Show("Vui lòng nhập mã khách hàng");
-
-            }
-            else
-            {
-
-                ProductDetail productDetail = new ProductDetail();
-
-                for (int i = 0; i < dgvDatHang.Rows.Count - 1; i++)
+                if (string.IsNullOrEmpty(txtMaHoaDon.Text))
                 {
-                    if (dgvDatHang.Rows.Count > 0)
+                    MessageBox.Show("Vui lòng tạo hóa đơn");
+                }
+                else if (string.IsNullOrWhiteSpace(txtMaKhachHang.Text))
+                {
+                    MessageBox.Show("Vui lòng nhập mã khách hàng");
+
+                }
+                else
+                {
+
+                    Order order = new Order();
+                    ProductDetail productDetail = new ProductDetail();
+
+                    for (int i = 0; i < dgvDatHang.Rows.Count - 1; i++)
                     {
-                        productDetail.OrderId = Convert.ToInt32(txtMaHoaDon.Text);
-                        productDetail.ProductId = Convert.ToInt32(dgvDatHang.Rows[i].Cells[0].Value.ToString());
-                        productDetail.Quantity = Convert.ToInt32(dgvDatHang.Rows[i].Cells[2].Value.ToString());
-                        productDetail.UnitPrice = Convert.ToInt32(dgvDatHang.Rows[i].Cells[3].Value.ToString());
-                        context.ProductDetails.Add(productDetail);
-                        int m = Convert.ToInt32(dgvDatHang.Rows[i].Cells[0].Value.ToString());
-                        Product p = context.Products.Where(x => x.id == m).FirstOrDefault();
-                        if (p != null)
+                        if (dgvDatHang.Rows.Count > 0)
                         {
-                            p.Quantity -= Convert.ToInt32(dgvDatHang.Rows[i].Cells[2].Value.ToString());
+                            productDetail.OrderId = Convert.ToInt32(txtMaHoaDon.Text);
+                            productDetail.ProductId = Convert.ToInt32(dgvDatHang.Rows[i].Cells[0].Value.ToString());
+                            productDetail.Quantity = Convert.ToInt32(dgvDatHang.Rows[i].Cells[2].Value.ToString());
+                            productDetail.UnitPrice = Convert.ToInt32(dgvDatHang.Rows[i].Cells[3].Value.ToString());
+                            context.ProductDetails.Add(productDetail);
+                            int m = Convert.ToInt32(dgvDatHang.Rows[i].Cells[0].Value.ToString());
+                            Product p = context.Products.Where(x => x.id == m).FirstOrDefault();
+                            if (p != null)
+                            {
+                                p.Quantity -= Convert.ToInt32(dgvDatHang.Rows[i].Cells[2].Value.ToString());
+                            }
                         }
                     }
+                    order.Id = Convert.ToInt32(txtMaKhachHang.Text);
+                    order.Amount = Convert.ToDecimal(txtTongTien.Text);
+                    context.SaveChanges();
+                    clear();
+                    Display();
                 }
-                context.Orders.Where(x => x.Id.ToString() == txtMaHoaDon.Text).FirstOrDefault().CustomerId = Convert.ToInt32(txtMaKhachHang.Text);
-                context.Orders.Where(x => x.Id.ToString() == txtMaHoaDon.Text).FirstOrDefault().Amount = Convert.ToDecimal(txtTongTien.Text);
-                context.SaveChanges();
-                clear();
-                Display();
             }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+
         }
 
         public void HienThi(bool b)

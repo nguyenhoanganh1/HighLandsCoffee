@@ -174,7 +174,7 @@ namespace WindowsFormsApp2
             }
             this.Text = "Form Trang Chủ";
             KhoaChucNangHeThong(false);
-
+            HienThiFormDangNhap("tsmDangNhap");
         }
 
         private void tsmTrangChu_Click(object sender, EventArgs e)
